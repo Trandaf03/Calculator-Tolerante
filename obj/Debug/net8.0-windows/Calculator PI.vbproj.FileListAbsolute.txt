@@ -1,0 +1,23 @@
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\Calculator PI.exe
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\Calculator PI.deps.json
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\Calculator PI.runtimeconfig.json
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\Calculator PI.dll
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\Calculator PI.pdb
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI.vbproj.GenerateResource.cache
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI.AssemblyInfoInputs.cache
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI.AssemblyInfo.vb
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI.vbproj.CoreCompileInputs.cache
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI.dll
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\refint\Calculator PI.dll
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI.pdb
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI.genruntimeconfig.cache
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\ref\Calculator PI.dll
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.main_window.resources
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_tolerante_fundamentale_liniare.resources
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.abateri_limita_generale_liniare.resources
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel37.csv
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel38.csv
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel39.csv
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_abateri_fundamentale_arbori.resources
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel310.csv
