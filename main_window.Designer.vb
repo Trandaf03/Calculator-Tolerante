@@ -118,9 +118,9 @@ Partial Class main_window
         Label1.AutoSize = True
         Label1.Location = New Point(50, 72)
         Label1.Name = "Label1"
-        Label1.Size = New Size(103, 15)
+        Label1.Size = New Size(117, 15)
         Label1.TabIndex = 2
-        Label1.Text = "Introdu o lungime"
+        Label1.Text = "Introdu dimensiunea"
         ' 
         ' combobox_treapta_toleranta_fundamentala
         ' 

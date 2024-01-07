@@ -43,9 +43,20 @@ Public Class main_window
 
 
         Dim toleranta_fundamentala As Double = 0
-        Dim abaterea_limita_generala As Double = 0
         Dim marime_toleranta_fundamentala As String = "µm"
 
+        Dim abaterea_limita_generala As Double = 0
+        Dim abatere_fundamentala_alezaj_EI As Double = 0
+        Dim marimea_batere_fundamentala_alezaj_EI As String = "µm"
+        Dim abatere_fundamentala_alezaj_ES As Double = 0
+        Dim marimea_abatere_fundamentala_alezaj_ES As String = "µm"
+        Dim abatere_fundamentala_arbore_ei As Double = 0
+        Dim marimea_abatere_fundamentala_arbore_ei As String = "µm"
+        Dim abatere_fundamentala_arbore_es As Double = 0
+        Dim marimea_abatere_fundamentala_arbore_es As String = "µm"
+        Dim delta As Double = 0
+        Dim abatere_fundamentala_special_js As Double = 0
+        Dim marimea_abatere_fundamentala_special_js As String = "µm"
 
 
         If combobox_treapta_toleranta_fundamentala.SelectedItem IsNot Nothing Then
@@ -110,11 +121,12 @@ Public Class main_window
         End If
 
 
-        Dim abaterea_limita_tinta_tesitura As abateri_limita_generale
-        Dim abaterea_limita_tinta_faratesitura As abateri_limita_generale
+
 
         If combobox_clasa_toleranta.SelectedItem IsNot Nothing Then
 
+            Dim abaterea_limita_tinta_tesitura As abateri_limita_generale
+            Dim abaterea_limita_tinta_faratesitura As abateri_limita_generale
 
             For Each abat As abateri_limita_generale In values_abateri_cu_tesitura
                 If abat.DimensiuneDeLa <= dimensiune_piesa AndAlso abat.DimensiunePanaLa > dimensiune_piesa Then
@@ -171,9 +183,479 @@ Public Class main_window
         End If
 
 
+        If combobox_tipul_piesei.SelectedItem IsNot Nothing Then
+            If Double.TryParse(text_dimensiune.Text, dimensiune_piesa) Then
+            Else
+                MessageBox.Show("Dimensiunea nu este un număr real!")
+                Return
+            End If
+
+            Dim abatere_fundamentala_alezaj_EI_TINTA As abateri_fundamentale_alezaje
+            Dim abatere_fundamentala_alezaj_ES_TINTA As abateri_fundamentale_alezaje
+            Dim abatere_fundamentala_arbore_es_TINTA As abateri_fundamentale_arbori
+            Dim abatere_fundamentala_arbore_ei_TINTA As abateri_fundamentale_arbori
+            Dim delta_tinta As abateri_fundamentale_alezaje_delta
+
+            For Each abale As abateri_fundamentale_alezaje In values_abateri_alezaje
+                If abale.DimensiuneDeLa <= dimensiune_piesa AndAlso abale.DimensiunePanaLa > dimensiune_piesa Then
+                    abatere_fundamentala_alezaj_EI_TINTA = abale
+                    Exit For
+                End If
+            Next
+            If IsNothing(abatere_fundamentala_alezaj_EI_TINTA) Then
+                abatere_fundamentala_alezaj_EI_TINTA = values_abateri_alezaje(values_abateri_alezaje.Count() - 1)
+            End If
+
+            For Each abale As abateri_fundamentale_alezaje In values_abateri_alezaje
+                If abale.DimensiuneDeLa <= dimensiune_piesa AndAlso abale.DimensiunePanaLa > dimensiune_piesa Then
+                    abatere_fundamentala_alezaj_ES_TINTA = abale
+                    Exit For
+                End If
+            Next
+            If IsNothing(abatere_fundamentala_alezaj_ES_TINTA) Then
+                abatere_fundamentala_alezaj_ES_TINTA = values_abateri_alezaje(values_abateri_alezaje.Count() - 1)
+            End If
+
+
+            Debug.WriteLine(abatere_fundamentala_alezaj_ES_TINTA.A.value)
+
+
+
+            For Each abaar As abateri_fundamentale_arbori In values_abateri_arbori
+                If abaar.DimensiuneDeLa <= dimensiune_piesa AndAlso abaar.DimensiunePanaLa > dimensiune_piesa Then
+                    abatere_fundamentala_arbore_es_TINTA = abaar
+                    Exit For
+                End If
+            Next
+            If IsNothing(abatere_fundamentala_arbore_es_TINTA) Then
+                abatere_fundamentala_arbore_es_TINTA = values_abateri_arbori(values_abateri_arbori.Count() - 1)
+            End If
+
+            For Each abaar As abateri_fundamentale_arbori In values_abateri_arbori
+                If abaar.DimensiuneDeLa <= dimensiune_piesa AndAlso abaar.DimensiunePanaLa > dimensiune_piesa Then
+                    abatere_fundamentala_arbore_ei_TINTA = abaar
+                    Exit For
+                End If
+            Next
+            If IsNothing(abatere_fundamentala_arbore_ei_TINTA) Then
+                abatere_fundamentala_arbore_ei_TINTA = values_abateri_arbori(values_abateri_arbori.Count() - 1)
+            End If
+
+            For Each deltacaut As abateri_fundamentale_alezaje_delta In delta_values_abateri_alezaje
+                If deltacaut.DimensiuneDeLa <= dimensiune_piesa AndAlso deltacaut.DimensiunePanaLa > dimensiune_piesa Then
+                    delta_tinta = deltacaut
+                    Exit For
+                End If
+            Next
+            If IsNothing(delta_tinta) Then
+                delta_tinta = delta_values_abateri_alezaje(delta_values_abateri_alezaje.Count() - 1)
+            End If
+
+            Dim it_value As String
+            Dim it_error_not_existing As Boolean = False
+            If combobox_treapta_toleranta_fundamentala.SelectedItem IsNot Nothing Then
+                it_value = combobox_treapta_toleranta_fundamentala.SelectedItem.ToString()
+            Else
+                MessageBox.Show("Selectează o treaptă de toleranțe!")
+                Return
+            End If
+
+            If dimensiune_piesa <= 500 Then
+                If it_value.Equals("IT3") Then
+                    delta = delta_tinta.IT3
+                ElseIf it_value.Equals("IT4") Then
+                    delta = delta_tinta.IT4
+                ElseIf it_value.Equals("IT5") Then
+                    delta = delta_tinta.IT5
+                ElseIf it_value.Equals("IT6") Then
+                    delta = delta_tinta.IT6
+                ElseIf it_value.Equals("IT7") Then
+                    delta = delta_tinta.IT7
+                ElseIf it_value.Equals("IT8") Then
+                    delta = delta_tinta.IT8
+                Else
+                    delta = 0
+                End If
+            Else
+                delta = 0
+            End If
+
+
+            If checkbox_arbore_es.SelectedItem IsNot Nothing Then
+                Dim selectedValue_arbore_es As String = checkbox_arbore_es.SelectedItem.ToString()
+                Select Case selectedValue_arbore_es
+                    Case "a"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.a.value
+                    Case "b"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.b.value
+                    Case "c"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.c.value
+                    Case "cd"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.cd.value
+                    Case "d"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.d.value
+                    Case "e"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.e.value
+                    Case "ef"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.ef.value
+                    Case "f"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.f.value
+                    Case "fg"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.fg.value
+                    Case "g"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.g.value
+                    Case "h"
+                        abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es_TINTA.h.value
+                    Case "js"
+                        Dim copie_it As String = it_value.Replace("IT", "")
+                        If copie_it.Equals("01") Then
+                            copie_it = "0"
+                        End If
+                        Dim nr_it As Integer = copie_it
+                        Dim nr_afisare As Double = nr_it / 2
+                        abatere_fundamentala_arbore_es = nr_afisare * -1
+                        abatere_fundamentala_special_js = nr_afisare
+                End Select
+
+            End If
+            If checkbox_arbore_ei.SelectedItem IsNot Nothing Then
+                Dim selectedValue_arbore_ei As String = checkbox_arbore_ei.SelectedItem.ToString()
+                Select Case selectedValue_arbore_ei
+                    Case "j"
+                        If it_value.Equals("IT5") OrElse it_value.Equals("IT6") Then
+                            abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.j56.value
+                        ElseIf it_value.Equals("IT7") Then
+                            abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.j7.value
+                        ElseIf it_value.Equals("IT8") Then
+                            abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.j8.value
+                        Else
+                            abatere_fundamentala_arbore_ei = 0
+                            it_error_not_existing = True
+                        End If
+                    Case "k"
+                        If it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.k4567.value
+                        Else
+                            abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.kfara4567.value
+                        End If
+                    Case "m"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.m.value
+                    Case "n"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.n.value
+                    Case "p"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.p.value
+                    Case "r"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.r.value
+                    Case "s"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.s.value
+                    Case "t"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.t.value
+                    Case "u"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.u.value
+                    Case "v"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.v.value
+                    Case "x"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.x.value
+                    Case "y"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.y.value
+                    Case "z"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.z.value
+                    Case "za"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.za.value
+                    Case "zb"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.zb.value
+                    Case "zc"
+                        abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei_TINTA.zc.value
+                End Select
+            End If
+            If checkbox_alezaj_EI.SelectedItem IsNot Nothing Then
+                Dim selectedValue_alezaj_EI As String = checkbox_alezaj_EI.SelectedItem.ToString()
+                Select Case selectedValue_alezaj_EI
+                    Case "A"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.A.value
+                    Case "B"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.B.value
+                    Case "C"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.C.value
+                    Case "CD"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.CD.value
+                    Case "D"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.D.value
+                    Case "E"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.E.value
+                    Case "EF"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.EF.value
+                    Case "F"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.F.value
+                    Case "FG"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.FG.value
+                    Case "G"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.G.value
+                    Case "H"
+                        abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI_TINTA.H.value
+                    Case "JS"
+                        Dim copie_it As String = it_value.Replace("IT", "")
+                        If copie_it.Equals("01") Then
+                            copie_it = "0"
+                        End If
+                        Dim nr_it As Integer = copie_it
+                        Dim nr_afisare As Double = nr_it / 2
+                        abatere_fundamentala_arbore_es = nr_afisare * -1
+                        abatere_fundamentala_special_js = nr_afisare
+                End Select
+
+
+            End If
+            If checkbox_alezaj_ES.SelectedItem IsNot Nothing Then
+                Dim selectedValue_alezaj_ES As String = checkbox_alezaj_ES.SelectedItem.ToString()
+                Dim selectedValue_alezaj_ES_hasDelta As Boolean = False
+
+
+                Select Case selectedValue_alezaj_ES
+                    Case "J"
+                        If it_value.Equals("IT6") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.J6.value
+                        ElseIf it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.J7.value
+                        ElseIf it_value.Equals("IT8") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.J8.value
+                        Else
+                            abatere_fundamentala_alezaj_ES = 0
+                            it_error_not_existing = True
+                        End If
+                    Case "K"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") OrElse it_value.Equals("IT8") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.K8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.K8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Kpeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.K8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "M"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") OrElse it_value.Equals("IT8") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.M8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.M8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Mpeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Mpeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "N"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") OrElse it_value.Equals("IT8") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.N8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.N8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Npeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Npeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "P"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.P8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.P8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Ppeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Ppeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "R"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.R8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.R8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Rpeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Rpeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "S"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.S8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.S8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Speste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Speste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "T"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.T8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.T8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Tpeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Tpeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "U"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.U8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.U8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Upeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Upeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "V"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.V8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.V8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Vpeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Vpeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "X"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.X8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.X8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Xpeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Xpeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "Y"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Y8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Y8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Ypeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Ypeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "Z"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Z8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Z8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.Zpeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.Zpeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "ZA"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.ZA8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.ZA8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.ZApeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.ZApeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "ZB"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.ZB8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.ZB8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.ZBpeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.ZBpeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                    Case "ZC"
+                        If it_value.Equals("IT01") OrElse it_value.Equals("IT0") OrElse it_value.Equals("IT1") OrElse it_value.Equals("IT2") OrElse it_value.Equals("IT3") OrElse it_value.Equals("IT4") OrElse it_value.Equals("IT5") OrElse it_value.Equals("IT6") OrElse it_value.Equals("IT7") Then
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.ZC8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.ZC8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        Else
+                            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES_TINTA.ZCpeste8.value
+                            If abatere_fundamentala_alezaj_ES_TINTA.ZCpeste8.hasDelta Then
+                                selectedValue_alezaj_ES_hasDelta = True
+                            End If
+                        End If
+                End Select
+
+                If selectedValue_alezaj_ES_hasDelta Then
+                    abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES + delta
+                End If
+
+
+            End If
+
+
+        Else
+            abatere_fundamentala_alezaj_EI = 0
+            abatere_fundamentala_alezaj_ES = 0
+            abatere_fundamentala_arbore_ei = 0
+            abatere_fundamentala_special_js = 0
+            abatere_fundamentala_arbore_es = 0
+            delta = 0
+        End If
+
+
+
+
+
+
+
+
         If toleranta_fundamentala > 1000 Then
             toleranta_fundamentala = toleranta_fundamentala / 1000
             marime_toleranta_fundamentala = "mm"
+        End If
+
+        If abatere_fundamentala_arbore_es > 1000 OrElse abatere_fundamentala_arbore_es < -1000 Then
+            abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es / 1000
+            marimea_abatere_fundamentala_arbore_es = "mm"
+        End If
+
+        If abatere_fundamentala_arbore_ei > 1000 OrElse abatere_fundamentala_arbore_ei < -1000 Then
+            abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei / 1000
+            marimea_abatere_fundamentala_arbore_ei = "mm"
+        End If
+        If abatere_fundamentala_special_js > 1000 OrElse abatere_fundamentala_special_js < -1000 Then
+            abatere_fundamentala_special_js = abatere_fundamentala_special_js / 1000
+            marimea_abatere_fundamentala_special_js = "mm"
+        End If
+
+        If abatere_fundamentala_alezaj_EI > 1000 OrElse abatere_fundamentala_alezaj_EI < -1000 Then
+            abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI / 1000
+            marimea_batere_fundamentala_alezaj_EI = "mm"
+        End If
+
+        If abatere_fundamentala_alezaj_ES > 1000 OrElse abatere_fundamentala_alezaj_ES < -1000 Then
+            abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES / 1000
+            marimea_abatere_fundamentala_alezaj_ES = "mm"
         End If
 
 
@@ -198,9 +680,45 @@ Public Class main_window
                 abaterea_limita_generala & "mm"
         End If
 
+        If combobox_tipul_piesei.SelectedItem IsNot Nothing Then
+            Dim selectedValue As String = combobox_tipul_piesei.SelectedItem.ToString()
+            Select Case selectedValue
+                Case "Arbore"
+                    If checkbox_arbore_es.SelectedItem IsNot Nothing Then
+                        text = text & vbCrLf &
+                            "Abaterea superioară es " & checkbox_arbore_es.SelectedItem.ToString() & ": " & abatere_fundamentala_arbore_es & marimea_abatere_fundamentala_arbore_es
+                        If checkbox_arbore_es.SelectedItem.ToString().Equals("js") Then
+                            text = text & vbCrLf &
+                            "Abaterea inferioară ei " & checkbox_arbore_es.SelectedItem.ToString() & ": " & abatere_fundamentala_special_js & marimea_abatere_fundamentala_special_js &
+                            " (rezultată din es treapta js)"
+
+                        End If
+                    End If
+                    If checkbox_arbore_ei.SelectedItem IsNot Nothing Then
+                        text = text & vbCrLf &
+                            "Abaterea inferioară ei " & checkbox_arbore_ei.SelectedItem.ToString() & ": " & abatere_fundamentala_arbore_ei & marimea_abatere_fundamentala_arbore_ei
+                    End If
+                Case "Alezaj"
+                    If checkbox_alezaj_EI.SelectedItem IsNot Nothing Then
+                        text = text & vbCrLf &
+                            "Abaterea inferioară EI " & checkbox_alezaj_EI.SelectedItem.ToString() & ": " & abatere_fundamentala_alezaj_EI & marimea_batere_fundamentala_alezaj_EI
+                        If checkbox_alezaj_EI.SelectedItem.ToString().Equals("JS") Then
+                            text = text & vbCrLf &
+                            "Abaterea superioară ES " & checkbox_alezaj_EI.SelectedItem.ToString() & ": " & abatere_fundamentala_special_js & marimea_abatere_fundamentala_special_js &
+                            " (rezultată din EI treapta JS)"
+
+                        End If
+                    End If
+                    If checkbox_alezaj_ES.SelectedItem IsNot Nothing Then
+                        text = text & vbCrLf &
+                            "Abaterea superioară ES " & checkbox_alezaj_ES.SelectedItem.ToString() & ": " & abatere_fundamentala_alezaj_ES & marimea_abatere_fundamentala_alezaj_ES
+
+                    End If
+            End Select
+        End If
 
         text_afisare.Text = text
-        '& vbCrLf &
+
     End Sub
 
 
@@ -628,7 +1146,6 @@ Public Class main_window
             End While
         End Using
     End Sub
-
     Private Sub combobox_tipul_piesei_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combobox_tipul_piesei.SelectedIndexChanged
 
         Dim selectedValue As String = combobox_tipul_piesei.SelectedItem.ToString()
