@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class abateri_limita_generale_liniare
+Partial Class tabel_abateri_fundamentale_alezaje_delta
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -32,18 +32,16 @@ Partial Class abateri_limita_generale_liniare
         DataGridView1.Location = New Point(12, 12)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.Size = New Size(570, 181)
-        DataGridView1.TabIndex = 1
+        DataGridView1.TabIndex = 2
         ' 
-        ' abateri_limita_generale_liniare
+        ' tabel_abateri_fundamentale_alezaje_delta
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
         Controls.Add(DataGridView1)
-        FormBorderStyle = FormBorderStyle.FixedDialog
-        Name = "abateri_limita_generale_liniare"
-        SizeGripStyle = SizeGripStyle.Hide
-        Text = "abateri_limita_generale_liniare"
+        Name = "tabel_abateri_fundamentale_alezaje_delta"
+        Text = "Delta"
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub

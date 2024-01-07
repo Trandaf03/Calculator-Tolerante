@@ -1,7 +1,7 @@
 ﻿Imports Microsoft.VisualBasic.FileIO
 Imports System.Globalization
 
-Public Class abateri_limita_generale_liniare
+Public Class tabel_abateri_limita_generale_liniare
 
 
     Dim objectsList_tesitura As New List(Of abateri_limita_generale)
@@ -75,4 +75,7 @@ Public Class abateri_limita_generale_liniare
         End Using
     End Sub
 
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
 End Class

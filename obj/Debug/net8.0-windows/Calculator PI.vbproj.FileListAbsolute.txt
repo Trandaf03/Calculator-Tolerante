@@ -15,7 +15,6 @@ C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI
 C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\ref\Calculator PI.dll
 C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.main_window.resources
 C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_tolerante_fundamentale_liniare.resources
-C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.abateri_limita_generale_liniare.resources
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel37.csv
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel38.csv
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel39.csv
@@ -25,3 +24,5 @@ C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel311.csv
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel311_delta.csv
 C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_abateri_fundamentale_alezaje.resources
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_abateri_fundamentale_alezaje_delta.resources
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_abateri_limita_generale_liniare.resources

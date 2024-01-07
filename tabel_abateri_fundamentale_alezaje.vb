@@ -383,7 +383,6 @@ Public Class tabel_abateri_fundamentale_alezaje
             End While
         End Using
     End Sub
-
     Private Function copyValue(ByRef object_from As clasa) As clasa
         If object_from Is Nothing Then
             Return New clasa()
@@ -394,8 +393,6 @@ Public Class tabel_abateri_fundamentale_alezaje
         obj_to.hasDelta = True
         Return obj_to
     End Function
-
-
     Private Sub ReadClasaFieldValue(ByRef obj As clasa, fields As String)
         If obj Is Nothing Then
             obj = New clasa()
@@ -419,7 +416,5 @@ Public Class tabel_abateri_fundamentale_alezaje
 
         End If
     End Sub
-
-
 
 End Class

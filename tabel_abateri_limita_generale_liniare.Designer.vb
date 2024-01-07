@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class tabel_abateri_fundamentale_arbori
+Partial Class tabel_abateri_limita_generale_liniare
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -31,19 +31,19 @@ Partial Class tabel_abateri_fundamentale_arbori
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridView1.Location = New Point(12, 12)
         DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(617, 292)
+        DataGridView1.Size = New Size(570, 181)
         DataGridView1.TabIndex = 1
         ' 
-        ' tabel_abateri_fundamentale_arbori
+        ' tabel_abateri_limita_generale_liniare
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
         Controls.Add(DataGridView1)
         FormBorderStyle = FormBorderStyle.FixedDialog
-        Name = "tabel_abateri_fundamentale_arbori"
+        Name = "tabel_abateri_limita_generale_liniare"
         SizeGripStyle = SizeGripStyle.Hide
-        Text = "Valorile numerice ale abaterilor fundamentale ale arborilor"
+        Text = "Abaterile limită generale pentru dimensiuni liniare"
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub

@@ -43,7 +43,7 @@ Partial Class tabel_abateri_fundamentale_alezaje
         FormBorderStyle = FormBorderStyle.FixedDialog
         Name = "tabel_abateri_fundamentale_alezaje"
         SizeGripStyle = SizeGripStyle.Hide
-        Text = "tabel_abateri_fundamentale_alezaje"
+        Text = "Valorile numerice ale abaterilor fundamentale ale alezajelor"
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
