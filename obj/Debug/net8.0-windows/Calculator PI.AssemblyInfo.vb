@@ -16,7 +16,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("Calculator PI"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be612195ddfdd43b613498c85f74aa61ce5e29d8"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4bf87f917edbfbe5acb991d698f7dbaa236f9355"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("Calculator PI"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("Calculator PI"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0"),  _
