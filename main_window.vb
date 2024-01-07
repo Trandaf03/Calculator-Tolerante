@@ -23,7 +23,8 @@ Public Class main_window
     End Sub
 
     Private Sub AlezajeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlezajeToolStripMenuItem.Click
-
+        Dim window As New tabel_abateri_fundamentale_alezaje()
+        window.Show()
     End Sub
 
     Private Sub DeltaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeltaToolStripMenuItem.Click
