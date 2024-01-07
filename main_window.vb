@@ -16,8 +16,17 @@ Public Class main_window
         window.Show()
     End Sub
 
-    Private Sub AbateriFundamentaleArboriToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbateriFundamentaleArboriToolStripMenuItem.Click
+
+    Private Sub ArboriToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ArboriToolStripMenuItem.Click
         Dim window As New tabel_abateri_fundamentale_arbori()
         window.Show()
+    End Sub
+
+    Private Sub AlezajeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlezajeToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub DeltaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeltaToolStripMenuItem.Click
+
     End Sub
 End Class

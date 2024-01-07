@@ -27,6 +27,9 @@ Partial Class main_window
         ToleranteFundamentaleLiniareToolStripMenuItem = New ToolStripMenuItem()
         AbaterileLimitaGeneraleLiniareToolStripMenuItem = New ToolStripMenuItem()
         AbateriFundamentaleArboriToolStripMenuItem = New ToolStripMenuItem()
+        ArboriToolStripMenuItem = New ToolStripMenuItem()
+        AlezajeToolStripMenuItem = New ToolStripMenuItem()
+        DeltaToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -60,9 +63,29 @@ Partial Class main_window
         ' 
         ' AbateriFundamentaleArboriToolStripMenuItem
         ' 
+        AbateriFundamentaleArboriToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ArboriToolStripMenuItem, AlezajeToolStripMenuItem})
         AbateriFundamentaleArboriToolStripMenuItem.Name = "AbateriFundamentaleArboriToolStripMenuItem"
         AbateriFundamentaleArboriToolStripMenuItem.Size = New Size(237, 22)
-        AbateriFundamentaleArboriToolStripMenuItem.Text = "Abateri fundamentale arbori"
+        AbateriFundamentaleArboriToolStripMenuItem.Text = "Abateri fundamentale"
+        ' 
+        ' ArboriToolStripMenuItem
+        ' 
+        ArboriToolStripMenuItem.Name = "ArboriToolStripMenuItem"
+        ArboriToolStripMenuItem.Size = New Size(180, 22)
+        ArboriToolStripMenuItem.Text = "Arbori"
+        ' 
+        ' AlezajeToolStripMenuItem
+        ' 
+        AlezajeToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {DeltaToolStripMenuItem})
+        AlezajeToolStripMenuItem.Name = "AlezajeToolStripMenuItem"
+        AlezajeToolStripMenuItem.Size = New Size(180, 22)
+        AlezajeToolStripMenuItem.Text = "Alezaje"
+        ' 
+        ' DeltaToolStripMenuItem
+        ' 
+        DeltaToolStripMenuItem.Name = "DeltaToolStripMenuItem"
+        DeltaToolStripMenuItem.Size = New Size(180, 22)
+        DeltaToolStripMenuItem.Text = "Delta"
         ' 
         ' main_window
         ' 
@@ -86,4 +109,7 @@ Partial Class main_window
     Friend WithEvents ToleranteFundamentaleLiniareToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AbaterileLimitaGeneraleLiniareToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AbateriFundamentaleArboriToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ArboriToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AlezajeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DeltaToolStripMenuItem As ToolStripMenuItem
 End Class

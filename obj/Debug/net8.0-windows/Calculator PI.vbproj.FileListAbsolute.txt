@@ -21,3 +21,7 @@ C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel38.csv
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel39.csv
 C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_abateri_fundamentale_arbori.resources
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel310.csv
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator PI.sourcelink.json
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel311.csv
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel311_delta.csv
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_abateri_fundamentale_alezaje.resources

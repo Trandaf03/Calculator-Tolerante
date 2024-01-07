@@ -4,6 +4,9 @@
     <Compile Update="abateri_limita_generale_liniare.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="tabel_abateri_fundamentale_alezaje.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="tabel_abateri_fundamentale_arbori.vb">
       <SubType>Form</SubType>
     </Compile>
