@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class tabel_abateri_fundamentale_alezaje_delta
+Partial Class tabel_clase_I_XII
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -29,22 +29,21 @@ Partial Class tabel_abateri_fundamentale_alezaje_delta
         ' DataGridView1
         ' 
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(17, 20)
+        DataGridView1.Location = New Point(13, 14)
         DataGridView1.Margin = New Padding(4, 5, 4, 5)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.RowHeadersWidth = 62
-        DataGridView1.Size = New Size(814, 302)
-        DataGridView1.TabIndex = 2
+        DataGridView1.Size = New Size(1048, 624)
+        DataGridView1.TabIndex = 1
         ' 
-        ' tabel_abateri_fundamentale_alezaje_delta
+        ' tabel_clase_I_XII
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1143, 750)
+        ClientSize = New Size(1339, 781)
         Controls.Add(DataGridView1)
-        Margin = New Padding(4, 5, 4, 5)
-        Name = "tabel_abateri_fundamentale_alezaje_delta"
-        Text = "Delta"
+        Name = "tabel_clase_I_XII"
+        Text = "tabel_clase_I_XII"
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub

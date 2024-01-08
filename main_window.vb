@@ -16,6 +16,19 @@ Public Class main_window
     Dim values_abateri_fara_tesitura As New List(Of abateri_limita_generale)
     'valori in micrometrii
     Dim values_tolerante_fundamentale_liniare As New List(Of tolerante_fundamentale)
+    'valori in micrometrii
+    Dim values_ToleranteRectilinePlanitateFormaProfiluluiSuprafetei As New List(Of claseI_XII)
+    'valori in micrometrii
+    Dim values_ToleranteCircularitateCilindritate As New List(Of claseI_XII)
+    'valori in micrometrii
+    Dim values_TolerantePozitiaNominalaCoaxialitateConcentritateSimetri As New List(Of claseI_XII)
+    'valori in micrometrii
+    Dim values_ToleranteParalelismPerpendicularitateInclinare As New List(Of claseI_XII)
+    'valori in micrometrii
+    Dim values_ToleranteindependenteDeDimensiuniAleBataiiRadiale As New List(Of claseI_XII)
+    'valori in micrometrii
+    Dim values_ToleranteindependenteDeDimensiuniAleBataiiFrontale As New List(Of claseI_XII)
+
 
     Private Sub main_window_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         readDataDelta("tabel311_delta.csv", delta_values_abateri_alezaje)
@@ -24,6 +37,13 @@ Public Class main_window
         readDataAbateriLimita("tabel39.csv", values_abateri_cu_tesitura)
         readDataAbateriLimita("tabel38.csv", values_abateri_fara_tesitura)
         readDataToleranteGenerale("tabel37.csv", values_tolerante_fundamentale_liniare)
+        readClase_I_XII("tabel41.csv", values_ToleranteRectilinePlanitateFormaProfiluluiSuprafetei)
+        readClase_I_XII("tabel42.csv", values_ToleranteCircularitateCilindritate)
+        readClase_I_XII("tabelul61.csv", values_TolerantePozitiaNominalaCoaxialitateConcentritateSimetri)
+        readClase_I_XII("tabelul62.csv", values_ToleranteParalelismPerpendicularitateInclinare)
+        readClase_I_XII("tabelul63.csv", values_ToleranteindependenteDeDimensiuniAleBataiiRadiale)
+        readClase_I_XII("tabelul64.csv", values_ToleranteindependenteDeDimensiuniAleBataiiFrontale)
+
 
         loadObjectsMenu()
 
@@ -814,6 +834,56 @@ Public Class main_window
         checkbox_alezaj_ES.Items.Add("ZB")
         checkbox_alezaj_ES.Items.Add("ZC")
 
+        ComboBox_toleranta_la_nr1.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr1.Items.Add("Planitate")
+        ComboBox_toleranta_la_nr1.Items.Add("Forma profilului")
+        ComboBox_toleranta_la_nr1.Items.Add("Forma suprafetei")
+        ComboBox_toleranta_la_nr1.Items.Add("Circularitate")
+        ComboBox_toleranta_la_nr1.Items.Add("Cilindricitate")
+        ComboBox_toleranta_la_nr1.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr1.Items.Add("Pozitia nominala")
+        ComboBox_toleranta_la_nr1.Items.Add("Coaxialitate")
+        ComboBox_toleranta_la_nr1.Items.Add("Simetrie")
+        ComboBox_toleranta_la_nr1.Items.Add("Paralelism")
+        ComboBox_toleranta_la_nr1.Items.Add("Perpendicularitate")
+        ComboBox_toleranta_la_nr1.Items.Add("Inclinare")
+        ComboBox_toleranta_la_nr1.Items.Add("Independente la dimensiune ale bataii radiale")
+        ComboBox_toleranta_la_nr1.Items.Add("Independente la dimensiune ale bataii frontale")
+
+
+        ComboBox_toleranta_la_nr2.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr2.Items.Add("Planitate")
+        ComboBox_toleranta_la_nr2.Items.Add("Forma profilului")
+        ComboBox_toleranta_la_nr2.Items.Add("Forma suprafetei")
+        ComboBox_toleranta_la_nr2.Items.Add("Circularitate")
+        ComboBox_toleranta_la_nr2.Items.Add("Cilindricitate")
+        ComboBox_toleranta_la_nr2.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr2.Items.Add("Pozitia nominala")
+        ComboBox_toleranta_la_nr2.Items.Add("Coaxialitate")
+        ComboBox_toleranta_la_nr2.Items.Add("Simetrie")
+        ComboBox_toleranta_la_nr2.Items.Add("Paralelism")
+        ComboBox_toleranta_la_nr2.Items.Add("Perpendicularitate")
+        ComboBox_toleranta_la_nr2.Items.Add("Inclinare")
+        ComboBox_toleranta_la_nr2.Items.Add("Independente la dimensiune ale bataii radiale")
+        ComboBox_toleranta_la_nr2.Items.Add("Independente la dimensiune ale bataii frontale")
+
+
+        ComboBox_toleranta_la_nr3.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr3.Items.Add("Planitate")
+        ComboBox_toleranta_la_nr3.Items.Add("Forma profilului")
+        ComboBox_toleranta_la_nr3.Items.Add("Forma suprafetei")
+        ComboBox_toleranta_la_nr3.Items.Add("Circularitate")
+        ComboBox_toleranta_la_nr3.Items.Add("Cilindricitate")
+        ComboBox_toleranta_la_nr3.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr3.Items.Add("Pozitia nominala")
+        ComboBox_toleranta_la_nr3.Items.Add("Coaxialitate")
+        ComboBox_toleranta_la_nr3.Items.Add("Simetrie")
+        ComboBox_toleranta_la_nr3.Items.Add("Paralelism")
+        ComboBox_toleranta_la_nr3.Items.Add("Perpendicularitate")
+        ComboBox_toleranta_la_nr3.Items.Add("Inclinare")
+        ComboBox_toleranta_la_nr3.Items.Add("Independente la dimensiune ale bataii radiale")
+        ComboBox_toleranta_la_nr3.Items.Add("Independente la dimensiune ale bataii frontale")
+
     End Sub
     Private Sub ToleranteFundamentaleLiniareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranteFundamentaleLiniareToolStripMenuItem.Click
 
@@ -838,10 +908,92 @@ Public Class main_window
         window.Show()
     End Sub
 
+    'Dim values_ToleranteRectilinePlanitateFormaProfiluluiSuprafetei As New List(Of claseI_XII)
+    'valori in micrometrii
+    'Dim values_ToleranteCircularitateCilindritate As New List(Of claseI_XII)
+    'valori in micrometrii
+    'Dim values_TolerantePozitiaNominalaCoaxialitateConcentritateSimetri As New List(Of claseI_XII)
+    'valori in micrometrii
+    'Dim values_ToleranteParalelismPerpendicularitateInclinare As New List(Of claseI_XII)
+    'valori in micrometrii
+    'Dim values_ToleranteindependenteDeDimensiuniAleBataiiRadiale As New List(Of claseI_XII)
+    'valori in micrometrii
+    'Dim values_ToleranteindependenteDeDimensiuniAleBataiiFrontale As New List(Of claseI_XII)
+
+
+    Private Sub ToleranțeIndividualeLaRectilinitatePlanitateFormaDatăAProfiluluiȘiFormaDatăASuprafețeiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranțeIndividualeLaRectilinitatePlanitateFormaDatăAProfiluluiȘiFormaDatăASuprafețeiToolStripMenuItem.Click
+        Dim window As New tabel_clase_I_XII()
+        window.valori() = values_ToleranteRectilinePlanitateFormaProfiluluiSuprafetei
+        window.nume_fereastra = "Valorile toleranțelor individuale la circularitate și la cilindricitate"
+        window.Show()
+    End Sub
+
+    Private Sub ValorileToleranțelorIndividualeLaCircularitateȘiLaCilindricitateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ValorileToleranțelorIndividualeLaCircularitateȘiLaCilindricitateToolStripMenuItem.Click
+        Dim window As New tabel_clase_I_XII()
+        window.valori() = values_ToleranteCircularitateCilindritate
+        window.nume_fereastra = "Valorile toleranțelor individuale la circularitate și la cilindricitate"
+        window.Show()
+    End Sub
+
+    Private Sub ToleranteleLaPozițiaNominalăLaCoaxialitateȘiConcentricitateȘiLaSimetrieToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranteleLaPozițiaNominalăLaCoaxialitateȘiConcentricitateȘiLaSimetrieToolStripMenuItem.Click
+        Dim window As New tabel_clase_I_XII()
+        window.valori() = values_TolerantePozitiaNominalaCoaxialitateConcentritateSimetri
+        window.nume_fereastra = "Tolerantele la poziția nominală, la coaxialitate și concentricitate și la simetrie"
+        window.Show()
+    End Sub
+
+    Private Sub ToleranteleIndividualeLaParalelismPerpendicularitateȘiÎnclinareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranteleIndividualeLaParalelismPerpendicularitateȘiÎnclinareToolStripMenuItem.Click
+        Dim window As New tabel_clase_I_XII()
+        window.valori() = values_ToleranteParalelismPerpendicularitateInclinare
+        window.nume_fereastra = "Tolerantele individuale la paralelism, perpendicularitate și înclinare"
+        window.Show()
+    End Sub
+
+    Private Sub ToleranteleIndividualeIndependenteDeDimensiunealeBiitiiiiRadialeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranteleIndividualeIndependenteDeDimensiunealeBiitiiiiRadialeToolStripMenuItem.Click
+        Dim window As New tabel_clase_I_XII()
+        window.valori() = values_ToleranteindependenteDeDimensiuniAleBataiiRadiale
+        window.nume_fereastra = "Tolerantele individuale independente de dimensiuneale bătăii radiale"
+        window.Show()
+    End Sub
+
+    Private Sub ToleranțeleIndividualeIndependenteDeDimensiuneAleBătăiiFrontaleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranțeleIndividualeIndependenteDeDimensiuneAleBătăiiFrontaleToolStripMenuItem.Click
+        Dim window As New tabel_clase_I_XII()
+        window.valori = values_ToleranteindependenteDeDimensiuniAleBataiiFrontale
+        window.nume_fereastra = "Toleranțele individuale independente de dimensiune ale bătăii frontale"
+        window.Show()
+    End Sub
 
 
 
+    Private Sub readClase_I_XII(filePath As String, list As List(Of claseI_XII))
+        Using parser As New TextFieldParser(filePath)
+            parser.TextFieldType = FieldType.Delimited
+            parser.SetDelimiters(",")
 
+            parser.ReadLine()
+            While Not parser.EndOfData
+                Dim fields As String() = parser.ReadFields()
+
+                Dim dimensiuneDeLa As Double = If(fields(0) = "-", 0, If(Double.TryParse(fields(0), CultureInfo.InvariantCulture, dimensiuneDeLa), dimensiuneDeLa, 0))
+                Dim dimensiunePanaLa As Double = If(fields(1) = "-", 0, If(Double.TryParse(fields(1), CultureInfo.InvariantCulture, dimensiunePanaLa), dimensiunePanaLa, 0))
+                Dim I As Double = If(fields(2) = "-", 0, If(Double.TryParse(fields(2), CultureInfo.InvariantCulture, I), I, 0))
+                Dim II As Double = If(fields(3) = "-", 0, If(Double.TryParse(fields(3), CultureInfo.InvariantCulture, II), II, 0))
+                Dim III As Double = If(fields(4) = "-", 0, If(Double.TryParse(fields(4), CultureInfo.InvariantCulture, III), III, 0))
+                Dim IV As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(5), CultureInfo.InvariantCulture, IV), IV, 0))
+                Dim V As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(6), CultureInfo.InvariantCulture, V), V, 0))
+                Dim VI As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(7), CultureInfo.InvariantCulture, VI), VI, 0))
+                Dim VII As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(8), CultureInfo.InvariantCulture, VII), VII, 0))
+                Dim VIII As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(9), CultureInfo.InvariantCulture, VIII), VIII, 0))
+                Dim IX As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(10), CultureInfo.InvariantCulture, IX), IX, 0))
+                Dim X As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(11), CultureInfo.InvariantCulture, X), X, 0))
+                Dim XI As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(12), CultureInfo.InvariantCulture, XI), XI, 0))
+                Dim XII As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(13), CultureInfo.InvariantCulture, XII), XII, 0))
+
+                Dim newObj As New claseI_XII(dimensiuneDeLa, dimensiunePanaLa, I, II, III, IV, V, VI, VII, VIII, IX, X, XII, XII)
+                list.Add(newObj)
+            End While
+        End Using
+    End Sub
 
 
 
