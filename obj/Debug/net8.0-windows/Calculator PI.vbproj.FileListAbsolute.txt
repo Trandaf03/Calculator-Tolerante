@@ -38,3 +38,6 @@ C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel65.csv
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel66.csv
 C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_tol_HKL.resources
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel67.csv
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_rugozitate.resources
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabelul55.csv
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.calcul_ajustaj.resources

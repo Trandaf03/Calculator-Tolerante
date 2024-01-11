@@ -33,6 +33,7 @@ Public Class main_window
     Dim values_generale_la_simetrie As New List(Of tol_HKL)
     Dim values_generale_la_perpendicularitate As New List(Of tol_HKL)
     Dim values_generale_la_vataii_suprafetelor As New List(Of tol_HKL)
+    Dim values_rugozitate As New List(Of rugozitate)
 
 
     Private Sub main_window_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -52,6 +53,7 @@ Public Class main_window
         readHKL("tabel65.csv", values_generale_la_simetrie)
         readHKL("tabel66.csv", values_generale_la_perpendicularitate)
         readHKL("tabel67.csv", values_generale_la_vataii_suprafetelor)
+        readRugozitate("tabelul55.csv", values_rugozitate)
 
         loadObjectsMenu()
 
@@ -3474,149 +3476,206 @@ Public Class main_window
                 text = text & "Toleranță la " & selectedValueIIXXII & " " & clasa_Selectata & ": " & tol_6_la & "µm"
             End If
 
-            If combobox_clasa_toleranta_hkl.SelectedItem IsNot Nothing Then
-                Dim ce_clasa_hkl = combobox_clasa_toleranta_hkl.SelectedItem.ToString()
-                Dim tolla_1 As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
-                Dim tolla_2 As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
-                Dim tolla_3 As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
-                Dim tolla_4 As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
-                Dim tolla_5 As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
-                Dim tolla_6 As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
-
-                'rectilinitate e 1
-                'planitate e 2
-                'simetrie e 3
-                'perpendicularitate e 4
-                'bataii suprafetelor e 5
-                Dim afisare_1_adv As Boolean = False
-                Dim afisare_2_adv As Boolean = False
-                Dim afisare_3_adv As Boolean = False
-                Dim afisare_4_adv As Boolean = False
-                Dim afisare_5_adv As Boolean = False
-
-                Select Case tolla_1
-                    Case "Planitate"
-                        afisare_1_adv = True
-                    Case "Rectilinitate"
-                        afisare_2_adv = True
-                    Case "Simetrie"
-                        afisare_3_adv = True
-                    Case "Perpendicularitate"
-                        afisare_4_adv = True
-                    Case "Independente la dimensiune ale bataii radiale"
-                        afisare_5_adv = True
-                    Case "Independente la dimensiune ale bataii frontale"
-                        afisare_5_adv = True
-                End Select
-                Select Case tolla_2
-                    Case "Planitate"
-                        afisare_1_adv = True
-                    Case "Rectilinitate"
-                        afisare_2_adv = True
-                    Case "Simetrie"
-                        afisare_3_adv = True
-                    Case "Perpendicularitate"
-                        afisare_4_adv = True
-                    Case "Independente la dimensiune ale bataii radiale"
-                        afisare_5_adv = True
-                    Case "Independente la dimensiune ale bataii frontale"
-                        afisare_5_adv = True
-                End Select
-                Select Case tolla_3
-                    Case "Planitate"
-                        afisare_1_adv = True
-                    Case "Rectilinitate"
-                        afisare_2_adv = True
-                    Case "Simetrie"
-                        afisare_3_adv = True
-                    Case "Perpendicularitate"
-                        afisare_4_adv = True
-                    Case "Independente la dimensiune ale bataii radiale"
-                        afisare_5_adv = True
-                    Case "Independente la dimensiune ale bataii frontale"
-                        afisare_5_adv = True
-                End Select
-                Select Case tolla_4
-                    Case "Planitate"
-                        afisare_1_adv = True
-                    Case "Rectilinitate"
-                        afisare_2_adv = True
-                    Case "Simetrie"
-                        afisare_3_adv = True
-                    Case "Perpendicularitate"
-                        afisare_4_adv = True
-                    Case "Independente la dimensiune ale bataii radiale"
-                        afisare_5_adv = True
-                    Case "Independente la dimensiune ale bataii frontale"
-                        afisare_5_adv = True
-                End Select
-                Select Case tolla_5
-                    Case "Planitate"
-                        afisare_1_adv = True
-                    Case "Rectilinitate"
-                        afisare_2_adv = True
-                    Case "Simetrie"
-                        afisare_3_adv = True
-                    Case "Perpendicularitate"
-                        afisare_4_adv = True
-                    Case "Independente la dimensiune ale bataii radiale"
-                        afisare_5_adv = True
-                    Case "Independente la dimensiune ale bataii frontale"
-                        afisare_5_adv = True
-                End Select
-                Select Case tolla_6
-                    Case "Planitate"
-                        afisare_1_adv = True
-                    Case "Rectilinitate"
-                        afisare_2_adv = True
-                    Case "Simetrie"
-                        afisare_3_adv = True
-                    Case "Perpendicularitate"
-                        afisare_4_adv = True
-                    Case "Independente la dimensiune ale bataii radiale"
-                        afisare_5_adv = True
-                    Case "Independente la dimensiune ale bataii frontale"
-                        afisare_5_adv = True
-                End Select
-
-                If afisare_1_adv = True Then
-                    If Not String.IsNullOrEmpty(text) Then
-                        text = text & vbCrLf
-                    End If
-                    text = text & "Toleranță generală la rectilinitate " & ce_clasa_hkl & ": " & tol_hkl_1 & "mm"
-                End If
-                If afisare_2_adv = True Then
-                    If Not String.IsNullOrEmpty(text) Then
-                        text = text & vbCrLf
-                    End If
-                    text = text & "Toleranță generală la planitate " & ce_clasa_hkl & ": " & tol_hkl_1 & "mm"
-                End If
-
-                If afisare_3_adv = True Then
-                    If Not String.IsNullOrEmpty(text) Then
-                        text = text & vbCrLf
-                    End If
-                    text = text & "Toleranță generală la simetrie " & ce_clasa_hkl & ": " & tol_hkl_2 & "mm"
-                End If
-                If afisare_4_adv = True Then
-                    If Not String.IsNullOrEmpty(text) Then
-                        text = text & vbCrLf
-                    End If
-                    text = text & "Toleranță generală la perpendicularitate " & ce_clasa_hkl & ": " & tol_hkl_3 & "mm"
-                End If
-
-
-                If afisare_5_adv = True = True Then
-                    If Not String.IsNullOrEmpty(text) Then
-                        text = text & vbCrLf
-                    End If
-                    text = text & "Toleranță generală ale bătăii suprafețelor " & ce_clasa_hkl & ": " & tol_hkl_4 & "mm"
-                End If
-
-            End If
 
         End If
-        text_afisare.Text = text
+
+
+
+        If combobox_clasa_toleranta_hkl.SelectedItem IsNot Nothing Then
+            Dim ce_clasa_hkl As String = "" ' combobox_clasa_toleranta_hkl.SelectedItem.ToString()
+            Dim tolla_1 As String = "" 'ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+            Dim tolla_2 As String = "" ' ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+            Dim tolla_3 As String = "" ' ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+            Dim tolla_4 As String = "" ' ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+            Dim tolla_5 As String = "" ' ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+            Dim tolla_6 As String = "" ' ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+
+            If combobox_clasa_toleranta_hkl.SelectedItem IsNot Nothing Then
+                ce_clasa_hkl = combobox_clasa_toleranta_hkl.SelectedItem.ToString()
+            End If
+
+            If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                tolla_1 = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+            End If
+            If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                tolla_2 = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+            End If
+            If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                tolla_3 = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+            End If
+            If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                tolla_4 = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+            End If
+            If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                tolla_5 = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+            End If
+            If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                tolla_6 = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+            End If
+
+
+            'rectilinitate e 1
+            'planitate e 2
+            'simetrie e 3
+            'perpendicularitate e 4
+            'bataii suprafetelor e 5
+            Dim afisare_1_adv As Boolean = False
+            Dim afisare_2_adv As Boolean = False
+            Dim afisare_3_adv As Boolean = False
+            Dim afisare_4_adv As Boolean = False
+            Dim afisare_5_adv As Boolean = False
+
+            Select Case tolla_1
+                Case "Planitate"
+                    afisare_1_adv = True
+                Case "Rectilinitate"
+                    afisare_2_adv = True
+                Case "Simetrie"
+                    afisare_3_adv = True
+                Case "Perpendicularitate"
+                    afisare_4_adv = True
+                Case "Independente la dimensiune ale bataii radiale"
+                    afisare_5_adv = True
+                Case "Independente la dimensiune ale bataii frontale"
+                    afisare_5_adv = True
+            End Select
+            Select Case tolla_2
+                Case "Planitate"
+                    afisare_1_adv = True
+                Case "Rectilinitate"
+                    afisare_2_adv = True
+                Case "Simetrie"
+                    afisare_3_adv = True
+                Case "Perpendicularitate"
+                    afisare_4_adv = True
+                Case "Independente la dimensiune ale bataii radiale"
+                    afisare_5_adv = True
+                Case "Independente la dimensiune ale bataii frontale"
+                    afisare_5_adv = True
+            End Select
+            Select Case tolla_3
+                Case "Planitate"
+                    afisare_1_adv = True
+                Case "Rectilinitate"
+                    afisare_2_adv = True
+                Case "Simetrie"
+                    afisare_3_adv = True
+                Case "Perpendicularitate"
+                    afisare_4_adv = True
+                Case "Independente la dimensiune ale bataii radiale"
+                    afisare_5_adv = True
+                Case "Independente la dimensiune ale bataii frontale"
+                    afisare_5_adv = True
+            End Select
+            Select Case tolla_4
+                Case "Planitate"
+                    afisare_1_adv = True
+                Case "Rectilinitate"
+                    afisare_2_adv = True
+                Case "Simetrie"
+                    afisare_3_adv = True
+                Case "Perpendicularitate"
+                    afisare_4_adv = True
+                Case "Independente la dimensiune ale bataii radiale"
+                    afisare_5_adv = True
+                Case "Independente la dimensiune ale bataii frontale"
+                    afisare_5_adv = True
+            End Select
+            Select Case tolla_5
+                Case "Planitate"
+                    afisare_1_adv = True
+                Case "Rectilinitate"
+                    afisare_2_adv = True
+                Case "Simetrie"
+                    afisare_3_adv = True
+                Case "Perpendicularitate"
+                    afisare_4_adv = True
+                Case "Independente la dimensiune ale bataii radiale"
+                    afisare_5_adv = True
+                Case "Independente la dimensiune ale bataii frontale"
+                    afisare_5_adv = True
+            End Select
+            Select Case tolla_6
+                Case "Planitate"
+                    afisare_1_adv = True
+                Case "Rectilinitate"
+                    afisare_2_adv = True
+                Case "Simetrie"
+                    afisare_3_adv = True
+                Case "Perpendicularitate"
+                    afisare_4_adv = True
+                Case "Independente la dimensiune ale bataii radiale"
+                    afisare_5_adv = True
+                Case "Independente la dimensiune ale bataii frontale"
+                    afisare_5_adv = True
+            End Select
+
+            If afisare_1_adv = True Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                text = text & "Toleranță generală la rectilinitate " & ce_clasa_hkl & ": " & tol_hkl_1 & "mm"
+            End If
+            If afisare_2_adv = True Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                text = text & "Toleranță generală la planitate " & ce_clasa_hkl & ": " & tol_hkl_1 & "mm"
+            End If
+
+            If afisare_3_adv = True Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                text = text & "Toleranță generală la simetrie " & ce_clasa_hkl & ": " & tol_hkl_2 & "mm"
+            End If
+            If afisare_4_adv = True Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                text = text & "Toleranță generală la perpendicularitate " & ce_clasa_hkl & ": " & tol_hkl_3 & "mm"
+            End If
+
+            If afisare_5_adv = True = True Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                text = text & "Toleranță generală ale bătăii suprafețelor " & ce_clasa_hkl & ": " & tol_hkl_4 & "mm"
+            End If
+        End If
+        If combobox_rugozitate.SelectedItem IsNot Nothing Then
+            Dim selectie_ra As String = combobox_rugozitate.SelectedItem.ToString()
+            Dim selectie_clasa As String = ""
+            If cmb_iso_stas.SelectedItem IsNot Nothing Then
+                selectie_clasa = cmb_iso_stas.SelectedItem.ToString()
+            Else
+                MessageBox.Show("Selecteaza clasa de rugozitate!")
+            End If
+            Dim val As String = String.Empty
+
+                For Each value As rugozitate In values_rugozitate
+                    If value.ISO.Equals(selectie_clasa) OrElse value.STAS.Equals(selectie_clasa) Then
+                        Select Case selectie_ra
+                            Case "Ra"
+                                val = value.Ra.ToString() & "µm"
+                            Case "Rz"
+                                val = value.Rz.ToString() & "µm"
+                            Case "Ry"
+                                val = value.Ry.ToString() & "µm"
+                            Case "l"
+                                val = value.l.ToString() & "mm"
+                        End Select
+                    End If
+                Next
+
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+
+                text = text & "Parametrul de rugozitate " & selectie_ra & " " & selectie_clasa & ": " & val.ToString()
+            End If
+
+            text_afisare.Text = text
 
     End Sub
 
@@ -3831,6 +3890,61 @@ Public Class main_window
         combobox_clasa_toleranta_hkl.Items.Add("K")
         combobox_clasa_toleranta_hkl.Items.Add("L")
 
+        cmb_iso_stas.Items.Add("IT4")
+        cmb_iso_stas.Items.Add("IT5")
+        cmb_iso_stas.Items.Add("IT6")
+        cmb_iso_stas.Items.Add("IT7")
+        cmb_iso_stas.Items.Add("IT8")
+        cmb_iso_stas.Items.Add("IT9")
+        cmb_iso_stas.Items.Add("IT10")
+        cmb_iso_stas.Items.Add("IT11")
+        cmb_iso_stas.Items.Add("IT12")
+        cmb_iso_stas.Items.Add("IT13")
+        cmb_iso_stas.Items.Add("IT14")
+        cmb_iso_stas.Items.Add("IT15")
+
+        combobox_rugozitate.Items.Add("Ra")
+        combobox_rugozitate.Items.Add("Rz")
+        combobox_rugozitate.Items.Add("Ry")
+        combobox_rugozitate.Items.Add("l")
+
+
+    End Sub
+
+
+
+    Private Sub switch_stas_CheckedChanged(sender As Object, e As EventArgs) Handles switch_stas.CheckedChanged
+        cmb_iso_stas.ResetText()
+        cmb_iso_stas.Items.Clear()
+        If switch_stas.Checked Then
+            cmb_iso_stas.Items.Add("N0")
+            cmb_iso_stas.Items.Add("N1")
+            cmb_iso_stas.Items.Add("N2")
+            cmb_iso_stas.Items.Add("N3")
+            cmb_iso_stas.Items.Add("N4")
+            cmb_iso_stas.Items.Add("N5")
+            cmb_iso_stas.Items.Add("N6")
+            cmb_iso_stas.Items.Add("N7")
+            cmb_iso_stas.Items.Add("N8")
+            cmb_iso_stas.Items.Add("N9")
+            cmb_iso_stas.Items.Add("N10")
+            cmb_iso_stas.Items.Add("N11")
+            cmb_iso_stas.Items.Add("N12")
+            cmb_iso_stas.Items.Add("N13")
+        Else
+            cmb_iso_stas.Items.Add("IT4")
+            cmb_iso_stas.Items.Add("IT5")
+            cmb_iso_stas.Items.Add("IT6")
+            cmb_iso_stas.Items.Add("IT7")
+            cmb_iso_stas.Items.Add("IT8")
+            cmb_iso_stas.Items.Add("IT9")
+            cmb_iso_stas.Items.Add("IT10")
+            cmb_iso_stas.Items.Add("IT11")
+            cmb_iso_stas.Items.Add("IT12")
+            cmb_iso_stas.Items.Add("IT13")
+            cmb_iso_stas.Items.Add("IT14")
+            cmb_iso_stas.Items.Add("IT15")
+        End If
     End Sub
     Private Sub ToleranteFundamentaleLiniareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranteFundamentaleLiniareToolStripMenuItem.Click
 
@@ -3922,6 +4036,21 @@ Public Class main_window
         window.Show()
     End Sub
 
+    Private Sub ClaseleDeRugozitateȘiParametriiAsociațiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClaseleDeRugozitateȘiParametriiAsociațiToolStripMenuItem.Click
+        Dim window As New tabel_rugozitate With {
+            .date_valori = values_rugozitate,
+            .nume_fereastra = "Clasele de rugozitate și parametrii asociați"
+        }
+        window.Show()
+    End Sub
+
+
+    Private Sub CalculAjustajToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculAjustajToolStripMenuItem.Click
+        Dim window As New calcul_ajustaj()
+        window.Show()
+    End Sub
+
+
     Private Sub readClase_I_XII(filePath As String, list As List(Of claseI_XII))
         Using parser As New TextFieldParser(filePath)
             parser.TextFieldType = FieldType.Delimited
@@ -3951,11 +4080,6 @@ Public Class main_window
             End While
         End Using
     End Sub
-
-
-
-
-
     Private Sub readDataDelta(filePath As String, list As List(Of abateri_fundamentale_alezaje_delta))
         Using parser As New TextFieldParser(filePath)
             parser.TextFieldType = FieldType.Delimited
@@ -3979,8 +4103,6 @@ Public Class main_window
             End While
         End Using
     End Sub
-
-
     Private Sub readHKL(filePath As String, list As List(Of tol_HKL))
         Using parser As New TextFieldParser(filePath)
             parser.TextFieldType = FieldType.Delimited
@@ -3998,6 +4120,27 @@ Public Class main_window
 
                 Dim newObj As New tol_HKL(dimensiuneDeLa, dimensiunePanaLa, H, K, L)
                 list.Add(newObj)
+            End While
+        End Using
+    End Sub
+    Private Sub readRugozitate(filePath As String, list As List(Of rugozitate))
+        Using parser As New TextFieldParser(filePath)
+            parser.TextFieldType = FieldType.Delimited
+            parser.SetDelimiters(",")
+
+            parser.ReadLine()
+            While Not parser.EndOfData
+                Dim fields As String() = parser.ReadFields()
+
+                Dim iso As String = fields(0)
+                Dim stas As String = fields(1)
+                Dim ra As Double = If(fields(2) = "-", 0, If(Double.TryParse(fields(2), CultureInfo.InvariantCulture, ra), ra, 0))
+                Dim rz As Double = If(fields(3) = "-", 0, If(Double.TryParse(fields(3), CultureInfo.InvariantCulture, rz), rz, 0))
+                Dim ry As Double = If(fields(4) = "-", 0, If(Double.TryParse(fields(4), CultureInfo.InvariantCulture, ry), ry, 0))
+                Dim l As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(5), CultureInfo.InvariantCulture, l), l, 0))
+                Debug.WriteLine(iso)
+                Dim newObj As New rugozitate(iso, stas, ra, rz, ry, l)
+                values_rugozitate.Add(newObj)
             End While
         End Using
     End Sub
@@ -4279,7 +4422,11 @@ Public Class main_window
     End Sub
     Private Sub combobox_tipul_piesei_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combobox_tipul_piesei.SelectedIndexChanged
 
-        Dim selectedValue As String = combobox_tipul_piesei.SelectedItem.ToString()
+
+        Dim selectedValue As String = ""
+        If combobox_tipul_piesei.SelectedItem IsNot Nothing Then
+            selectedValue = combobox_tipul_piesei.SelectedItem.ToString()
+        End If
         Select Case selectedValue
             Case "Arbore"
                 label_arbore_es.Visible = True
@@ -4304,7 +4451,37 @@ Public Class main_window
         End Select
     End Sub
 
-    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+    Private Sub btn_reset_Click(sender As Object, e As EventArgs) Handles btn_reset.Click
+        text_dimensiune.Text = ""
+        combobox_treapta_toleranta_fundamentala.SelectedIndex = -1
+        combobox_clasa_toleranta.SelectedIndex = -1
+        checkbox_este_tesitura.Checked = False
+        combobox_tipul_piesei.SelectedIndex = -1
+        checkbox_alezaj_ES.SelectedIndex = -1
+        checkbox_alezaj_EI.SelectedIndex = -1
+        checkbox_arbore_ei.SelectedIndex = -1
+        checkbox_arbore_es.SelectedIndex = -1
+        switch_stas.Checked = False
+        cmb_iso_stas.SelectedIndex = -1
+        combobox_rugozitate.SelectedIndex = -1
+        combobox_clasa_precizie.SelectedIndex = -1
+        combobox_clasa_toleranta_hkl.SelectedIndex = -1
+        ComboBox_toleranta_la_nr1.SelectedIndex = -1
+        ComboBox_toleranta_la_nr2.SelectedIndex = -1
+        ComboBox_toleranta_la_nr3.SelectedIndex = -1
+        ComboBox_toleranta_la_nr4.SelectedIndex = -1
+        ComboBox_toleranta_la_nr5.SelectedIndex = -1
+        ComboBox_toleranta_la_nr6.SelectedIndex = -1
+        text_afisare.Text = String.Empty
 
+        checkbox_alezaj_ES.Visible = False
+        checkbox_alezaj_EI.Visible = False
+        checkbox_arbore_ei.Visible = False
+        checkbox_arbore_es.Visible = False
+        label_alezaj_EI.Visible = False
+        label_alezaj_ES.Visible = False
+        label_arbore_ei.Visible = False
+        label_arbore_es.Visible = False
     End Sub
+
 End Class

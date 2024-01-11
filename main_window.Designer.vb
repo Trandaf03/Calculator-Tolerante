@@ -40,6 +40,8 @@ Partial Class main_window
         ToleranțeGeneraleLaSimetrieToolStripMenuItem = New ToolStripMenuItem()
         ToleranțeGeneraleLaPerpendicularitateToolStripMenuItem = New ToolStripMenuItem()
         ToleranțeGeneraleAleBătăiiSuprafețelorToolStripMenuItem = New ToolStripMenuItem()
+        ClaseleDeRugozitateȘiParametriiAsociațiToolStripMenuItem = New ToolStripMenuItem()
+        CalculAjustajToolStripMenuItem = New ToolStripMenuItem()
         text_dimensiune = New TextBox()
         Label1 = New Label()
         combobox_treapta_toleranta_fundamentala = New ComboBox()
@@ -75,13 +77,20 @@ Partial Class main_window
         ComboBox_toleranta_la_nr5 = New ComboBox()
         Label12 = New Label()
         ComboBox_toleranta_la_nr4 = New ComboBox()
+        Label13 = New Label()
+        combobox_rugozitate = New ComboBox()
+        Label14 = New Label()
+        ComboBox2 = New ComboBox()
+        switch_stas = New CheckBox()
+        cmb_iso_stas = New ComboBox()
+        btn_reset = New Button()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' MenuStrip1
         ' 
         MenuStrip1.ImageScalingSize = New Size(24, 24)
-        MenuStrip1.Items.AddRange(New ToolStripItem() {VeziTabeleToolStripMenuItem})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {VeziTabeleToolStripMenuItem, CalculAjustajToolStripMenuItem})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
         MenuStrip1.Size = New Size(800, 24)
@@ -90,7 +99,7 @@ Partial Class main_window
         ' 
         ' VeziTabeleToolStripMenuItem
         ' 
-        VeziTabeleToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ToleranteFundamentaleLiniareToolStripMenuItem, AbaterileLimitaGeneraleLiniareToolStripMenuItem, AbateriFundamentaleArboriToolStripMenuItem, ToleranțeIndividualeLaRectilinitatePlanitateFormaDatăAProfiluluiȘiFormaDatăASuprafețeiToolStripMenuItem, ValorileToleranțelorIndividualeLaCircularitateȘiLaCilindricitateToolStripMenuItem, ToleranteleLaPozițiaNominalăLaCoaxialitateȘiConcentricitateȘiLaSimetrieToolStripMenuItem, ToleranteleIndividualeLaParalelismPerpendicularitateȘiÎnclinareToolStripMenuItem, ToleranteleIndividualeIndependenteDeDimensiunealeBiitiiiiRadialeToolStripMenuItem, ToleranțeleIndividualeIndependenteDeDimensiuneAleBătăiiFrontaleToolStripMenuItem, ToleranțeGeneraleLaRectilinitateȘiPlanitateToolStripMenuItem, ToleranțeGeneraleLaSimetrieToolStripMenuItem, ToleranțeGeneraleLaPerpendicularitateToolStripMenuItem, ToleranțeGeneraleAleBătăiiSuprafețelorToolStripMenuItem})
+        VeziTabeleToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ToleranteFundamentaleLiniareToolStripMenuItem, AbaterileLimitaGeneraleLiniareToolStripMenuItem, AbateriFundamentaleArboriToolStripMenuItem, ToleranțeIndividualeLaRectilinitatePlanitateFormaDatăAProfiluluiȘiFormaDatăASuprafețeiToolStripMenuItem, ValorileToleranțelorIndividualeLaCircularitateȘiLaCilindricitateToolStripMenuItem, ToleranteleLaPozițiaNominalăLaCoaxialitateȘiConcentricitateȘiLaSimetrieToolStripMenuItem, ToleranteleIndividualeLaParalelismPerpendicularitateȘiÎnclinareToolStripMenuItem, ToleranteleIndividualeIndependenteDeDimensiunealeBiitiiiiRadialeToolStripMenuItem, ToleranțeleIndividualeIndependenteDeDimensiuneAleBătăiiFrontaleToolStripMenuItem, ToleranțeGeneraleLaRectilinitateȘiPlanitateToolStripMenuItem, ToleranțeGeneraleLaSimetrieToolStripMenuItem, ToleranțeGeneraleLaPerpendicularitateToolStripMenuItem, ToleranțeGeneraleAleBătăiiSuprafețelorToolStripMenuItem, ClaseleDeRugozitateȘiParametriiAsociațiToolStripMenuItem})
         VeziTabeleToolStripMenuItem.Name = "VeziTabeleToolStripMenuItem"
         VeziTabeleToolStripMenuItem.Size = New Size(74, 20)
         VeziTabeleToolStripMenuItem.Text = "Vezi tabele"
@@ -193,6 +202,18 @@ Partial Class main_window
         ToleranțeGeneraleAleBătăiiSuprafețelorToolStripMenuItem.Size = New Size(569, 22)
         ToleranțeGeneraleAleBătăiiSuprafețelorToolStripMenuItem.Text = "Toleranțe generale ale bătăii suprafețelor"
         ' 
+        ' ClaseleDeRugozitateȘiParametriiAsociațiToolStripMenuItem
+        ' 
+        ClaseleDeRugozitateȘiParametriiAsociațiToolStripMenuItem.Name = "ClaseleDeRugozitateȘiParametriiAsociațiToolStripMenuItem"
+        ClaseleDeRugozitateȘiParametriiAsociațiToolStripMenuItem.Size = New Size(569, 22)
+        ClaseleDeRugozitateȘiParametriiAsociațiToolStripMenuItem.Text = "Clasele de rugozitate și parametrii asociați"
+        ' 
+        ' CalculAjustajToolStripMenuItem
+        ' 
+        CalculAjustajToolStripMenuItem.Name = "CalculAjustajToolStripMenuItem"
+        CalculAjustajToolStripMenuItem.Size = New Size(89, 20)
+        CalculAjustajToolStripMenuItem.Text = "Calcul ajustaj"
+        ' 
         ' text_dimensiune
         ' 
         text_dimensiune.Location = New Point(54, 60)
@@ -228,7 +249,7 @@ Partial Class main_window
         ' 
         ' buton_calculeaza
         ' 
-        buton_calculeaza.Location = New Point(293, 510)
+        buton_calculeaza.Location = New Point(296, 280)
         buton_calculeaza.Name = "buton_calculeaza"
         buton_calculeaza.Size = New Size(218, 44)
         buton_calculeaza.TabIndex = 5
@@ -237,10 +258,10 @@ Partial Class main_window
         ' 
         ' text_afisare
         ' 
-        text_afisare.Location = New Point(109, 317)
+        text_afisare.Location = New Point(104, 330)
         text_afisare.Multiline = True
         text_afisare.Name = "text_afisare"
-        text_afisare.Size = New Size(608, 187)
+        text_afisare.Size = New Size(608, 373)
         text_afisare.TabIndex = 6
         ' 
         ' Label3
@@ -263,7 +284,7 @@ Partial Class main_window
         ' checkbox_este_tesitura
         ' 
         checkbox_este_tesitura.AutoSize = True
-        checkbox_este_tesitura.Location = New Point(545, 62)
+        checkbox_este_tesitura.Location = New Point(536, 59)
         checkbox_este_tesitura.Name = "checkbox_este_tesitura"
         checkbox_este_tesitura.Size = New Size(108, 19)
         checkbox_este_tesitura.TabIndex = 9
@@ -491,11 +512,79 @@ Partial Class main_window
         ComboBox_toleranta_la_nr4.Size = New Size(162, 23)
         ComboBox_toleranta_la_nr4.TabIndex = 31
         ' 
+        ' Label13
+        ' 
+        Label13.AutoSize = True
+        Label13.Location = New Point(655, 123)
+        Label13.Name = "Label13"
+        Label13.Size = New Size(133, 15)
+        Label13.TabIndex = 40
+        Label13.Text = "Parametrii de rugozitate"
+        ' 
+        ' combobox_rugozitate
+        ' 
+        combobox_rugozitate.FormattingEnabled = True
+        combobox_rugozitate.Location = New Point(655, 141)
+        combobox_rugozitate.Name = "combobox_rugozitate"
+        combobox_rugozitate.Size = New Size(114, 23)
+        combobox_rugozitate.TabIndex = 39
+        ' 
+        ' Label14
+        ' 
+        Label14.AutoSize = True
+        Label14.Location = New Point(655, 123)
+        Label14.Name = "Label14"
+        Label14.Size = New Size(119, 15)
+        Label14.TabIndex = 38
+        Label14.Text = "Abaterea inferioară ei"
+        ' 
+        ' ComboBox2
+        ' 
+        ComboBox2.FormattingEnabled = True
+        ComboBox2.Location = New Point(655, 141)
+        ComboBox2.Name = "ComboBox2"
+        ComboBox2.Size = New Size(114, 23)
+        ComboBox2.TabIndex = 37
+        ' 
+        ' switch_stas
+        ' 
+        switch_stas.AutoSize = True
+        switch_stas.Location = New Point(583, 116)
+        switch_stas.Name = "switch_stas"
+        switch_stas.Size = New Size(51, 19)
+        switch_stas.TabIndex = 41
+        switch_stas.Text = "STAS"
+        switch_stas.UseVisualStyleBackColor = True
+        ' 
+        ' cmb_iso_stas
+        ' 
+        cmb_iso_stas.FormattingEnabled = True
+        cmb_iso_stas.Location = New Point(583, 141)
+        cmb_iso_stas.Name = "cmb_iso_stas"
+        cmb_iso_stas.Size = New Size(52, 23)
+        cmb_iso_stas.TabIndex = 42
+        ' 
+        ' btn_reset
+        ' 
+        btn_reset.Location = New Point(520, 300)
+        btn_reset.Name = "btn_reset"
+        btn_reset.Size = New Size(68, 24)
+        btn_reset.TabIndex = 43
+        btn_reset.Text = "Reseteaza"
+        btn_reset.UseVisualStyleBackColor = True
+        ' 
         ' main_window
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 566)
+        ClientSize = New Size(800, 715)
+        Controls.Add(btn_reset)
+        Controls.Add(cmb_iso_stas)
+        Controls.Add(switch_stas)
+        Controls.Add(Label13)
+        Controls.Add(combobox_rugozitate)
+        Controls.Add(Label14)
+        Controls.Add(ComboBox2)
         Controls.Add(Label10)
         Controls.Add(ComboBox_toleranta_la_nr6)
         Controls.Add(Label11)
@@ -596,4 +685,13 @@ Partial Class main_window
     Friend WithEvents ComboBox_toleranta_la_nr5 As ComboBox
     Friend WithEvents Label12 As Label
     Friend WithEvents ComboBox_toleranta_la_nr4 As ComboBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents combobox_rugozitate As ComboBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents ClaseleDeRugozitateȘiParametriiAsociațiToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents switch_stas As CheckBox
+    Friend WithEvents cmb_iso_stas As ComboBox
+    Friend WithEvents CalculAjustajToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents btn_reset As Button
 End Class
