@@ -28,6 +28,11 @@ Public Class main_window
     Dim values_ToleranteindependenteDeDimensiuniAleBataiiRadiale As New List(Of claseI_XII)
     'valori in micrometrii
     Dim values_ToleranteindependenteDeDimensiuniAleBataiiFrontale As New List(Of claseI_XII)
+    'valori in milimetrii
+    Dim values_tolerante_generale_la_rectilinitate_si_planitate As New List(Of tol_HKL)
+    Dim values_generale_la_simetrie As New List(Of tol_HKL)
+    Dim values_generale_la_perpendicularitate As New List(Of tol_HKL)
+    Dim values_generale_la_vataii_suprafetelor As New List(Of tol_HKL)
 
 
     Private Sub main_window_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -43,7 +48,10 @@ Public Class main_window
         readClase_I_XII("tabelul62.csv", values_ToleranteParalelismPerpendicularitateInclinare)
         readClase_I_XII("tabelul63.csv", values_ToleranteindependenteDeDimensiuniAleBataiiRadiale)
         readClase_I_XII("tabelul64.csv", values_ToleranteindependenteDeDimensiuniAleBataiiFrontale)
-
+        readHKL("tabel43.csv", values_tolerante_generale_la_rectilinitate_si_planitate)
+        readHKL("tabel65.csv", values_generale_la_simetrie)
+        readHKL("tabel66.csv", values_generale_la_perpendicularitate)
+        readHKL("tabel67.csv", values_generale_la_vataii_suprafetelor)
 
         loadObjectsMenu()
 
@@ -77,6 +85,18 @@ Public Class main_window
         Dim delta As Double = 0
         Dim abatere_fundamentala_special_js As Double = 0
         Dim marimea_abatere_fundamentala_special_js As String = "µm"
+
+        Dim tol_1_la As Double
+        Dim tol_2_la As Double
+        Dim tol_3_la As Double
+        Dim tol_4_la As Double
+        Dim tol_5_la As Double
+        Dim tol_6_la As Double
+
+        Dim tol_hkl_1 As Double
+        Dim tol_hkl_2 As Double
+        Dim tol_hkl_3 As Double
+        Dim tol_hkl_4 As Double
 
 
         If combobox_treapta_toleranta_fundamentala.SelectedItem IsNot Nothing Then
@@ -178,7 +198,6 @@ Public Class main_window
                     Else
                         abaterea_limita_generala = abaterea_limita_tinta_faratesitura.f
                     End If
-
                 Case "Mijlocie (m)"
                     If checkbox_este_tesitura.Checked Then
                         abaterea_limita_generala = abaterea_limita_tinta_tesitura.m
@@ -643,9 +662,2687 @@ Public Class main_window
         End If
 
 
+        If combobox_clasa_precizie.SelectedItem IsNot Nothing Then
+            'values_ToleranteRectilinePlanitateFormaProfiluluiSuprafetei
+            Dim target_1 As claseI_XII
+            'values_ToleranteCircularitateCilindritate
+            Dim target_2 As claseI_XII
+            'values_TolerantePozitiaNominalaCoaxialitateConcentritateSimetri 
+            Dim target_3 As claseI_XII
+            'values_ToleranteParalelismPerpendicularitateInclinare
+            Dim target_4 As claseI_XII
+            'values_ToleranteindependenteDeDimensiuniAleBataiiRadiale
+            Dim target_5 As claseI_XII
+            'values_ToleranteindependenteDeDimensiuniAleBataiiFrontale
+            Dim target_6 As claseI_XII
+
+            For Each smth As claseI_XII In values_ToleranteRectilinePlanitateFormaProfiluluiSuprafetei
+                If smth.DimensiuneDeLa <= dimensiune_piesa AndAlso smth.DimensiunePanaLa > dimensiune_piesa Then
+                    target_1 = smth
+                    Exit For
+                End If
+            Next
+            For Each smth As claseI_XII In values_ToleranteCircularitateCilindritate
+                If smth.DimensiuneDeLa <= dimensiune_piesa AndAlso smth.DimensiunePanaLa > dimensiune_piesa Then
+                    target_2 = smth
+                    Exit For
+                End If
+            Next
+            For Each smth As claseI_XII In values_TolerantePozitiaNominalaCoaxialitateConcentritateSimetri
+                If smth.DimensiuneDeLa <= dimensiune_piesa AndAlso smth.DimensiunePanaLa > dimensiune_piesa Then
+                    target_3 = smth
+                    Exit For
+                End If
+            Next
+            For Each smth As claseI_XII In values_ToleranteParalelismPerpendicularitateInclinare
+                If smth.DimensiuneDeLa <= dimensiune_piesa AndAlso smth.DimensiunePanaLa > dimensiune_piesa Then
+                    target_4 = smth
+                    Exit For
+                End If
+            Next
+            For Each smth As claseI_XII In values_ToleranteindependenteDeDimensiuniAleBataiiRadiale
+                If smth.DimensiuneDeLa <= dimensiune_piesa AndAlso smth.DimensiunePanaLa > dimensiune_piesa Then
+                    target_5 = smth
+                    Exit For
+                End If
+            Next
+            For Each smth As claseI_XII In values_ToleranteindependenteDeDimensiuniAleBataiiFrontale
+                If smth.DimensiuneDeLa <= dimensiune_piesa AndAlso smth.DimensiunePanaLa > dimensiune_piesa Then
+                    target_6 = smth
+                    Exit For
+                End If
+            Next
+
+            If IsNothing(target_1) Then
+                target_1 = values_ToleranteRectilinePlanitateFormaProfiluluiSuprafetei(values_ToleranteRectilinePlanitateFormaProfiluluiSuprafetei.Count() - 1)
+            End If
+            If IsNothing(target_2) Then
+                target_2 = values_ToleranteCircularitateCilindritate(values_ToleranteCircularitateCilindritate.Count() - 1)
+            End If
+            If IsNothing(target_3) Then
+                target_3 = values_TolerantePozitiaNominalaCoaxialitateConcentritateSimetri(values_TolerantePozitiaNominalaCoaxialitateConcentritateSimetri.Count() - 1)
+            End If
+            If IsNothing(target_4) Then
+                target_4 = values_ToleranteParalelismPerpendicularitateInclinare(values_ToleranteParalelismPerpendicularitateInclinare.Count() - 1)
+            End If
+            If IsNothing(target_5) Then
+                target_5 = values_ToleranteindependenteDeDimensiuniAleBataiiRadiale(values_ToleranteindependenteDeDimensiuniAleBataiiRadiale.Count() - 1)
+            End If
+            If IsNothing(target_6) Then
+                target_6 = values_ToleranteindependenteDeDimensiuniAleBataiiFrontale(values_ToleranteindependenteDeDimensiuniAleBataiiFrontale.Count() - 1)
+            End If
+
+            Dim selectedValueIIXXII As String = combobox_clasa_precizie.SelectedItem.ToString()
+            Select Case selectedValueIIXXII
+                Case "I"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.I
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.I
+                            Case "Forma profilului"
+                                tol_1_la = target_1.I
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.I
+                            Case "Circularitate"
+                                tol_1_la = target_2.I
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.I
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.I
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.I
+                            Case "Concentricitate"
+                                tol_1_la = target_3.I
+                            Case "Simetrie"
+                                tol_1_la = target_3.I
+                            Case "Paralelism"
+                                tol_1_la = target_4.I
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.I
+                            Case "Inclinare"
+                                tol_1_la = target_4.I
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.I
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.I
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.I
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.I
+                            Case "Forma profilului"
+                                tol_2_la = target_1.I
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.I
+                            Case "Circularitate"
+                                tol_2_la = target_2.I
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.I
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.I
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.I
+                            Case "Concentricitate"
+                                tol_2_la = target_3.I
+                            Case "Simetrie"
+                                tol_2_la = target_3.I
+                            Case "Paralelism"
+                                tol_2_la = target_4.I
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.I
+                            Case "Inclinare"
+                                tol_2_la = target_4.I
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.I
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.I
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.I
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.I
+                            Case "Forma profilului"
+                                tol_3_la = target_1.I
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.I
+                            Case "Circularitate"
+                                tol_3_la = target_2.I
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.I
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.I
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.I
+                            Case "Concentricitate"
+                                tol_3_la = target_3.I
+                            Case "Simetrie"
+                                tol_3_la = target_3.I
+                            Case "Paralelism"
+                                tol_3_la = target_4.I
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.I
+                            Case "Inclinare"
+                                tol_3_la = target_4.I
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.I
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.I
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.I
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.I
+                            Case "Forma profilului"
+                                tol_4_la = target_1.I
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.I
+                            Case "Circularitate"
+                                tol_4_la = target_2.I
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.I
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.I
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.I
+                            Case "Concentricitate"
+                                tol_4_la = target_3.I
+                            Case "Simetrie"
+                                tol_4_la = target_3.I
+                            Case "Paralelism"
+                                tol_4_la = target_4.I
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.I
+                            Case "Inclinare"
+                                tol_4_la = target_4.I
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.I
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.I
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.I
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.I
+                            Case "Forma profilului"
+                                tol_5_la = target_1.I
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.I
+                            Case "Circularitate"
+                                tol_5_la = target_2.I
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.I
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.I
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.I
+                            Case "Concentricitate"
+                                tol_5_la = target_3.I
+                            Case "Simetrie"
+                                tol_5_la = target_3.I
+                            Case "Paralelism"
+                                tol_5_la = target_4.I
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.I
+                            Case "Inclinare"
+                                tol_5_la = target_4.I
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.I
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.I
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.I
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.I
+                            Case "Forma profilului"
+                                tol_6_la = target_1.I
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.I
+                            Case "Circularitate"
+                                tol_6_la = target_2.I
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.I
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.I
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.I
+                            Case "Concentricitate"
+                                tol_6_la = target_3.I
+                            Case "Simetrie"
+                                tol_6_la = target_3.I
+                            Case "Paralelism"
+                                tol_6_la = target_4.I
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.I
+                            Case "Inclinare"
+                                tol_6_la = target_4.I
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.I
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.I
+                        End Select
+                    End If
+                Case "II"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.II
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.II
+                            Case "Forma profilului"
+                                tol_1_la = target_1.II
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.II
+                            Case "Circularitate"
+                                tol_1_la = target_2.II
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.II
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.II
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.II
+                            Case "Concentricitate"
+                                tol_1_la = target_3.II
+                            Case "Simetrie"
+                                tol_1_la = target_3.II
+                            Case "Paralelism"
+                                tol_1_la = target_4.II
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.II
+                            Case "Inclinare"
+                                tol_1_la = target_4.II
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.II
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.II
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.II
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.II
+                            Case "Forma profilului"
+                                tol_2_la = target_1.II
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.II
+                            Case "Circularitate"
+                                tol_2_la = target_2.II
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.II
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.II
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.II
+                            Case "Concentricitate"
+                                tol_2_la = target_3.II
+                            Case "Simetrie"
+                                tol_2_la = target_3.II
+                            Case "Paralelism"
+                                tol_2_la = target_4.II
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.II
+                            Case "Inclinare"
+                                tol_2_la = target_4.II
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.II
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.II
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.II
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.II
+                            Case "Forma profilului"
+                                tol_3_la = target_1.II
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.II
+                            Case "Circularitate"
+                                tol_3_la = target_2.II
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.II
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.II
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.II
+                            Case "Concentricitate"
+                                tol_3_la = target_3.II
+                            Case "Simetrie"
+                                tol_3_la = target_3.II
+                            Case "Paralelism"
+                                tol_3_la = target_4.II
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.II
+                            Case "Inclinare"
+                                tol_3_la = target_4.II
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.II
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.II
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.II
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.II
+                            Case "Forma profilului"
+                                tol_4_la = target_1.II
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.II
+                            Case "Circularitate"
+                                tol_4_la = target_2.II
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.II
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.II
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.II
+                            Case "Concentricitate"
+                                tol_4_la = target_3.II
+                            Case "Simetrie"
+                                tol_4_la = target_3.II
+                            Case "Paralelism"
+                                tol_4_la = target_4.II
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.II
+                            Case "Inclinare"
+                                tol_4_la = target_4.II
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.II
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.II
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.II
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.II
+                            Case "Forma profilului"
+                                tol_5_la = target_1.II
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.II
+                            Case "Circularitate"
+                                tol_5_la = target_2.II
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.II
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.II
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.II
+                            Case "Concentricitate"
+                                tol_5_la = target_3.II
+                            Case "Simetrie"
+                                tol_5_la = target_3.II
+                            Case "Paralelism"
+                                tol_5_la = target_4.II
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.II
+                            Case "Inclinare"
+                                tol_5_la = target_4.II
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.II
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.II
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.II
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.II
+                            Case "Forma profilului"
+                                tol_6_la = target_1.II
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.II
+                            Case "Circularitate"
+                                tol_6_la = target_2.II
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.II
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.II
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.II
+                            Case "Concentricitate"
+                                tol_6_la = target_3.II
+                            Case "Simetrie"
+                                tol_6_la = target_3.II
+                            Case "Paralelism"
+                                tol_6_la = target_4.II
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.II
+                            Case "Inclinare"
+                                tol_6_la = target_4.II
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.II
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.II
+                        End Select
+                    End If
+                Case "III"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.III
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.III
+                            Case "Forma profilului"
+                                tol_1_la = target_1.III
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.III
+                            Case "Circularitate"
+                                tol_1_la = target_2.III
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.III
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.III
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.III
+                            Case "Concentricitate"
+                                tol_1_la = target_3.III
+                            Case "Simetrie"
+                                tol_1_la = target_3.III
+                            Case "Paralelism"
+                                tol_1_la = target_4.III
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.III
+                            Case "Inclinare"
+                                tol_1_la = target_4.III
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.III
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.III
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.III
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.III
+                            Case "Forma profilului"
+                                tol_2_la = target_1.III
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.III
+                            Case "Circularitate"
+                                tol_2_la = target_2.III
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.III
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.III
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.III
+                            Case "Concentricitate"
+                                tol_2_la = target_3.III
+                            Case "Simetrie"
+                                tol_2_la = target_3.III
+                            Case "Paralelism"
+                                tol_2_la = target_4.III
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.III
+                            Case "Inclinare"
+                                tol_2_la = target_4.III
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.III
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.III
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.III
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.III
+                            Case "Forma profilului"
+                                tol_3_la = target_1.III
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.III
+                            Case "Circularitate"
+                                tol_3_la = target_2.III
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.III
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.III
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.III
+                            Case "Concentricitate"
+                                tol_3_la = target_3.III
+                            Case "Simetrie"
+                                tol_3_la = target_3.III
+                            Case "Paralelism"
+                                tol_3_la = target_4.III
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.III
+                            Case "Inclinare"
+                                tol_3_la = target_4.III
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.III
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.III
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.III
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.III
+                            Case "Forma profilului"
+                                tol_4_la = target_1.III
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.III
+                            Case "Circularitate"
+                                tol_4_la = target_2.III
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.III
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.III
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.III
+                            Case "Concentricitate"
+                                tol_4_la = target_3.III
+                            Case "Simetrie"
+                                tol_4_la = target_3.III
+                            Case "Paralelism"
+                                tol_4_la = target_4.III
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.III
+                            Case "Inclinare"
+                                tol_4_la = target_4.III
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.III
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.III
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.III
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.III
+                            Case "Forma profilului"
+                                tol_5_la = target_1.III
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.III
+                            Case "Circularitate"
+                                tol_5_la = target_2.III
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.III
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.III
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.III
+                            Case "Concentricitate"
+                                tol_5_la = target_3.III
+                            Case "Simetrie"
+                                tol_5_la = target_3.III
+                            Case "Paralelism"
+                                tol_5_la = target_4.III
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.III
+                            Case "Inclinare"
+                                tol_5_la = target_4.III
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.III
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.III
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.III
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.III
+                            Case "Forma profilului"
+                                tol_6_la = target_1.III
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.III
+                            Case "Circularitate"
+                                tol_6_la = target_2.III
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.III
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.III
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.III
+                            Case "Concentricitate"
+                                tol_6_la = target_3.III
+                            Case "Simetrie"
+                                tol_6_la = target_3.III
+                            Case "Paralelism"
+                                tol_6_la = target_4.III
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.III
+                            Case "Inclinare"
+                                tol_6_la = target_4.III
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.III
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.III
+                        End Select
+                    End If
+                Case "IV"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.IV
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.IV
+                            Case "Forma profilului"
+                                tol_1_la = target_1.IV
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.IV
+                            Case "Circularitate"
+                                tol_1_la = target_2.IV
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.IV
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.IV
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.IV
+                            Case "Concentricitate"
+                                tol_1_la = target_3.IV
+                            Case "Simetrie"
+                                tol_1_la = target_3.IV
+                            Case "Paralelism"
+                                tol_1_la = target_4.IV
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.IV
+                            Case "Inclinare"
+                                tol_1_la = target_4.IV
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.IV
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.IV
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.IV
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.IV
+                            Case "Forma profilului"
+                                tol_2_la = target_1.IV
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.IV
+                            Case "Circularitate"
+                                tol_2_la = target_2.IV
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.IV
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.IV
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.IV
+                            Case "Concentricitate"
+                                tol_2_la = target_3.IV
+                            Case "Simetrie"
+                                tol_2_la = target_3.IV
+                            Case "Paralelism"
+                                tol_2_la = target_4.IV
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.IV
+                            Case "Inclinare"
+                                tol_2_la = target_4.IV
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.IV
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.IV
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.IV
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.IV
+                            Case "Forma profilului"
+                                tol_3_la = target_1.IV
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.IV
+                            Case "Circularitate"
+                                tol_3_la = target_2.IV
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.IV
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.IV
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.IV
+                            Case "Concentricitate"
+                                tol_3_la = target_3.IV
+                            Case "Simetrie"
+                                tol_3_la = target_3.IV
+                            Case "Paralelism"
+                                tol_3_la = target_4.IV
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.IV
+                            Case "Inclinare"
+                                tol_3_la = target_4.IV
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.IV
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.IV
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.IV
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.IV
+                            Case "Forma profilului"
+                                tol_4_la = target_1.IV
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.IV
+                            Case "Circularitate"
+                                tol_4_la = target_2.IV
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.IV
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.IV
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.IV
+                            Case "Concentricitate"
+                                tol_4_la = target_3.IV
+                            Case "Simetrie"
+                                tol_4_la = target_3.IV
+                            Case "Paralelism"
+                                tol_4_la = target_4.IV
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.IV
+                            Case "Inclinare"
+                                tol_4_la = target_4.IV
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.IV
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.IV
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.IV
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.IV
+                            Case "Forma profilului"
+                                tol_5_la = target_1.IV
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.IV
+                            Case "Circularitate"
+                                tol_5_la = target_2.IV
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.IV
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.IV
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.IV
+                            Case "Concentricitate"
+                                tol_5_la = target_3.IV
+                            Case "Simetrie"
+                                tol_5_la = target_3.IV
+                            Case "Paralelism"
+                                tol_5_la = target_4.IV
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.IV
+                            Case "Inclinare"
+                                tol_5_la = target_4.IV
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.IV
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.IV
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.IV
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.IV
+                            Case "Forma profilului"
+                                tol_6_la = target_1.IV
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.IV
+                            Case "Circularitate"
+                                tol_6_la = target_2.IV
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.IV
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.IV
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.IV
+                            Case "Concentricitate"
+                                tol_6_la = target_3.IV
+                            Case "Simetrie"
+                                tol_6_la = target_3.IV
+                            Case "Paralelism"
+                                tol_6_la = target_4.IV
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.IV
+                            Case "Inclinare"
+                                tol_6_la = target_4.IV
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.IV
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.IV
+                        End Select
+                    End If
+                Case "V"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.V
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.V
+                            Case "Forma profilului"
+                                tol_1_la = target_1.V
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.V
+                            Case "Circularitate"
+                                tol_1_la = target_2.V
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.V
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.V
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.V
+                            Case "Concentricitate"
+                                tol_1_la = target_3.V
+                            Case "Simetrie"
+                                tol_1_la = target_3.V
+                            Case "Paralelism"
+                                tol_1_la = target_4.V
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.V
+                            Case "Inclinare"
+                                tol_1_la = target_4.V
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.V
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.V
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.V
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.V
+                            Case "Forma profilului"
+                                tol_2_la = target_1.V
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.V
+                            Case "Circularitate"
+                                tol_2_la = target_2.V
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.V
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.V
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.V
+                            Case "Concentricitate"
+                                tol_2_la = target_3.V
+                            Case "Simetrie"
+                                tol_2_la = target_3.V
+                            Case "Paralelism"
+                                tol_2_la = target_4.V
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.V
+                            Case "Inclinare"
+                                tol_2_la = target_4.V
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.V
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.V
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.V
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.V
+                            Case "Forma profilului"
+                                tol_3_la = target_1.V
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.V
+                            Case "Circularitate"
+                                tol_3_la = target_2.V
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.V
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.V
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.V
+                            Case "Concentricitate"
+                                tol_3_la = target_3.V
+                            Case "Simetrie"
+                                tol_3_la = target_3.V
+                            Case "Paralelism"
+                                tol_3_la = target_4.V
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.V
+                            Case "Inclinare"
+                                tol_3_la = target_4.V
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.V
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.V
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.V
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.V
+                            Case "Forma profilului"
+                                tol_4_la = target_1.V
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.V
+                            Case "Circularitate"
+                                tol_4_la = target_2.V
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.V
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.V
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.V
+                            Case "Concentricitate"
+                                tol_4_la = target_3.V
+                            Case "Simetrie"
+                                tol_4_la = target_3.V
+                            Case "Paralelism"
+                                tol_4_la = target_4.V
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.V
+                            Case "Inclinare"
+                                tol_4_la = target_4.V
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.V
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.V
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.V
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.V
+                            Case "Forma profilului"
+                                tol_5_la = target_1.V
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.V
+                            Case "Circularitate"
+                                tol_5_la = target_2.V
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.V
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.V
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.V
+                            Case "Concentricitate"
+                                tol_5_la = target_3.V
+                            Case "Simetrie"
+                                tol_5_la = target_3.V
+                            Case "Paralelism"
+                                tol_5_la = target_4.V
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.V
+                            Case "Inclinare"
+                                tol_5_la = target_4.V
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.V
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.V
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.V
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.V
+                            Case "Forma profilului"
+                                tol_6_la = target_1.V
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.V
+                            Case "Circularitate"
+                                tol_6_la = target_2.V
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.V
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.V
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.V
+                            Case "Concentricitate"
+                                tol_6_la = target_3.V
+                            Case "Simetrie"
+                                tol_6_la = target_3.V
+                            Case "Paralelism"
+                                tol_6_la = target_4.V
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.V
+                            Case "Inclinare"
+                                tol_6_la = target_4.V
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.V
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.V
+                        End Select
+                    End If
+                Case "VI"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.VI
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.VI
+                            Case "Forma profilului"
+                                tol_1_la = target_1.VI
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.VI
+                            Case "Circularitate"
+                                tol_1_la = target_2.VI
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.VI
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.VI
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.VI
+                            Case "Concentricitate"
+                                tol_1_la = target_3.VI
+                            Case "Simetrie"
+                                tol_1_la = target_3.VI
+                            Case "Paralelism"
+                                tol_1_la = target_4.VI
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.VI
+                            Case "Inclinare"
+                                tol_1_la = target_4.VI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.VI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.VI
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.VI
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.VI
+                            Case "Forma profilului"
+                                tol_2_la = target_1.VI
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.VI
+                            Case "Circularitate"
+                                tol_2_la = target_2.VI
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.VI
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.VI
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.VI
+                            Case "Concentricitate"
+                                tol_2_la = target_3.VI
+                            Case "Simetrie"
+                                tol_2_la = target_3.VI
+                            Case "Paralelism"
+                                tol_2_la = target_4.VI
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.VI
+                            Case "Inclinare"
+                                tol_2_la = target_4.VI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.VI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.VI
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.VI
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.VI
+                            Case "Forma profilului"
+                                tol_3_la = target_1.VI
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.VI
+                            Case "Circularitate"
+                                tol_3_la = target_2.VI
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.VI
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.VI
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.VI
+                            Case "Concentricitate"
+                                tol_3_la = target_3.VI
+                            Case "Simetrie"
+                                tol_3_la = target_3.VI
+                            Case "Paralelism"
+                                tol_3_la = target_4.VI
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.VI
+                            Case "Inclinare"
+                                tol_3_la = target_4.VI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.VI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.VI
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.VI
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.VI
+                            Case "Forma profilului"
+                                tol_4_la = target_1.VI
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.VI
+                            Case "Circularitate"
+                                tol_4_la = target_2.VI
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.VI
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.VI
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.VI
+                            Case "Concentricitate"
+                                tol_4_la = target_3.VI
+                            Case "Simetrie"
+                                tol_4_la = target_3.VI
+                            Case "Paralelism"
+                                tol_4_la = target_4.VI
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.VI
+                            Case "Inclinare"
+                                tol_4_la = target_4.VI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.VI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.VI
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.VI
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.VI
+                            Case "Forma profilului"
+                                tol_5_la = target_1.VI
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.VI
+                            Case "Circularitate"
+                                tol_5_la = target_2.VI
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.VI
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.VI
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.VI
+                            Case "Concentricitate"
+                                tol_5_la = target_3.VI
+                            Case "Simetrie"
+                                tol_5_la = target_3.VI
+                            Case "Paralelism"
+                                tol_5_la = target_4.VI
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.VI
+                            Case "Inclinare"
+                                tol_5_la = target_4.VI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.VI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.VI
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.VI
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.VI
+                            Case "Forma profilului"
+                                tol_6_la = target_1.VI
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.VI
+                            Case "Circularitate"
+                                tol_6_la = target_2.VI
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.VI
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.VI
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.VI
+                            Case "Concentricitate"
+                                tol_6_la = target_3.VI
+                            Case "Simetrie"
+                                tol_6_la = target_3.VI
+                            Case "Paralelism"
+                                tol_6_la = target_4.VI
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.VI
+                            Case "Inclinare"
+                                tol_6_la = target_4.VI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.VI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.VI
+                        End Select
+                    End If
+                Case "VII"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.VII
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.VII
+                            Case "Forma profilului"
+                                tol_1_la = target_1.VII
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.VII
+                            Case "Circularitate"
+                                tol_1_la = target_2.VII
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.VII
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.VII
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.VII
+                            Case "Concentricitate"
+                                tol_1_la = target_3.VII
+                            Case "Simetrie"
+                                tol_1_la = target_3.VII
+                            Case "Paralelism"
+                                tol_1_la = target_4.VII
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.VII
+                            Case "Inclinare"
+                                tol_1_la = target_4.VII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.VII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.VII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.VII
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.VII
+                            Case "Forma profilului"
+                                tol_2_la = target_1.VII
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.VII
+                            Case "Circularitate"
+                                tol_2_la = target_2.VII
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.VII
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.VII
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.VII
+                            Case "Concentricitate"
+                                tol_2_la = target_3.VII
+                            Case "Simetrie"
+                                tol_2_la = target_3.VII
+                            Case "Paralelism"
+                                tol_2_la = target_4.VII
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.VII
+                            Case "Inclinare"
+                                tol_2_la = target_4.VII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.VII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.VII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.VII
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.VII
+                            Case "Forma profilului"
+                                tol_3_la = target_1.VII
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.VII
+                            Case "Circularitate"
+                                tol_3_la = target_2.VII
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.VII
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.VII
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.VII
+                            Case "Concentricitate"
+                                tol_3_la = target_3.VII
+                            Case "Simetrie"
+                                tol_3_la = target_3.VII
+                            Case "Paralelism"
+                                tol_3_la = target_4.VII
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.VII
+                            Case "Inclinare"
+                                tol_3_la = target_4.VII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.VII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.VII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.VII
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.VII
+                            Case "Forma profilului"
+                                tol_4_la = target_1.VII
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.VII
+                            Case "Circularitate"
+                                tol_4_la = target_2.VII
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.VII
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.VII
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.VII
+                            Case "Concentricitate"
+                                tol_4_la = target_3.VII
+                            Case "Simetrie"
+                                tol_4_la = target_3.VII
+                            Case "Paralelism"
+                                tol_4_la = target_4.VII
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.VII
+                            Case "Inclinare"
+                                tol_4_la = target_4.VII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.VII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.VII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.VII
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.VII
+                            Case "Forma profilului"
+                                tol_5_la = target_1.VII
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.VII
+                            Case "Circularitate"
+                                tol_5_la = target_2.VII
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.VII
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.VII
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.VII
+                            Case "Concentricitate"
+                                tol_5_la = target_3.VII
+                            Case "Simetrie"
+                                tol_5_la = target_3.VII
+                            Case "Paralelism"
+                                tol_5_la = target_4.VII
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.VII
+                            Case "Inclinare"
+                                tol_5_la = target_4.VII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.VII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.VII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.VII
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.VII
+                            Case "Forma profilului"
+                                tol_6_la = target_1.VII
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.VII
+                            Case "Circularitate"
+                                tol_6_la = target_2.VII
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.VII
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.VII
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.VII
+                            Case "Concentricitate"
+                                tol_6_la = target_3.VII
+                            Case "Simetrie"
+                                tol_6_la = target_3.VII
+                            Case "Paralelism"
+                                tol_6_la = target_4.VII
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.VII
+                            Case "Inclinare"
+                                tol_6_la = target_4.VII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.VII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.VII
+                        End Select
+                    End If
+                Case "VIII"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.VIII
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.VIII
+                            Case "Forma profilului"
+                                tol_1_la = target_1.VIII
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.VIII
+                            Case "Circularitate"
+                                tol_1_la = target_2.VIII
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.VIII
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.VIII
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.VIII
+                            Case "Concentricitate"
+                                tol_1_la = target_3.VIII
+                            Case "Simetrie"
+                                tol_1_la = target_3.VIII
+                            Case "Paralelism"
+                                tol_1_la = target_4.VIII
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.VIII
+                            Case "Inclinare"
+                                tol_1_la = target_4.VIII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.VIII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.VIII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.VIII
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.VIII
+                            Case "Forma profilului"
+                                tol_2_la = target_1.VIII
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.VIII
+                            Case "Circularitate"
+                                tol_2_la = target_2.VIII
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.VIII
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.VIII
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.VIII
+                            Case "Concentricitate"
+                                tol_2_la = target_3.VIII
+                            Case "Simetrie"
+                                tol_2_la = target_3.VIII
+                            Case "Paralelism"
+                                tol_2_la = target_4.VIII
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.VIII
+                            Case "Inclinare"
+                                tol_2_la = target_4.VIII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.VIII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.VIII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.VIII
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.VIII
+                            Case "Forma profilului"
+                                tol_3_la = target_1.VIII
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.VIII
+                            Case "Circularitate"
+                                tol_3_la = target_2.VIII
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.VIII
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.VIII
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.VIII
+                            Case "Concentricitate"
+                                tol_3_la = target_3.VIII
+                            Case "Simetrie"
+                                tol_3_la = target_3.VIII
+                            Case "Paralelism"
+                                tol_3_la = target_4.VIII
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.VIII
+                            Case "Inclinare"
+                                tol_3_la = target_4.VIII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.VIII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.VIII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.VIII
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.VIII
+                            Case "Forma profilului"
+                                tol_4_la = target_1.VIII
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.VIII
+                            Case "Circularitate"
+                                tol_4_la = target_2.VIII
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.VIII
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.VIII
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.VIII
+                            Case "Concentricitate"
+                                tol_4_la = target_3.VIII
+                            Case "Simetrie"
+                                tol_4_la = target_3.VIII
+                            Case "Paralelism"
+                                tol_4_la = target_4.VIII
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.VIII
+                            Case "Inclinare"
+                                tol_4_la = target_4.VIII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.VIII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.VIII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.VIII
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.VIII
+                            Case "Forma profilului"
+                                tol_5_la = target_1.VIII
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.VIII
+                            Case "Circularitate"
+                                tol_5_la = target_2.VIII
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.VIII
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.VIII
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.VIII
+                            Case "Concentricitate"
+                                tol_5_la = target_3.VIII
+                            Case "Simetrie"
+                                tol_5_la = target_3.VIII
+                            Case "Paralelism"
+                                tol_5_la = target_4.VIII
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.VIII
+                            Case "Inclinare"
+                                tol_5_la = target_4.VIII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.VIII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.VIII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.VIII
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.VIII
+                            Case "Forma profilului"
+                                tol_6_la = target_1.VIII
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.VIII
+                            Case "Circularitate"
+                                tol_6_la = target_2.VIII
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.VIII
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.VIII
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.VIII
+                            Case "Concentricitate"
+                                tol_6_la = target_3.VIII
+                            Case "Simetrie"
+                                tol_6_la = target_3.VIII
+                            Case "Paralelism"
+                                tol_6_la = target_4.VIII
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.VIII
+                            Case "Inclinare"
+                                tol_6_la = target_4.VIII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.VIII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.VIII
+                        End Select
+                    End If
+                Case "IX"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.IX
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.IX
+                            Case "Forma profilului"
+                                tol_1_la = target_1.IX
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.IX
+                            Case "Circularitate"
+                                tol_1_la = target_2.IX
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.IX
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.IX
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.IX
+                            Case "Concentricitate"
+                                tol_1_la = target_3.IX
+                            Case "Simetrie"
+                                tol_1_la = target_3.IX
+                            Case "Paralelism"
+                                tol_1_la = target_4.IX
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.IX
+                            Case "Inclinare"
+                                tol_1_la = target_4.IX
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.IX
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.IX
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.IX
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.IX
+                            Case "Forma profilului"
+                                tol_2_la = target_1.IX
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.IX
+                            Case "Circularitate"
+                                tol_2_la = target_2.IX
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.IX
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.IX
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.IX
+                            Case "Concentricitate"
+                                tol_2_la = target_3.IX
+                            Case "Simetrie"
+                                tol_2_la = target_3.IX
+                            Case "Paralelism"
+                                tol_2_la = target_4.IX
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.IX
+                            Case "Inclinare"
+                                tol_2_la = target_4.IX
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.IX
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.IX
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.IX
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.IX
+                            Case "Forma profilului"
+                                tol_3_la = target_1.IX
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.IX
+                            Case "Circularitate"
+                                tol_3_la = target_2.IX
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.IX
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.IX
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.IX
+                            Case "Concentricitate"
+                                tol_3_la = target_3.IX
+                            Case "Simetrie"
+                                tol_3_la = target_3.IX
+                            Case "Paralelism"
+                                tol_3_la = target_4.IX
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.IX
+                            Case "Inclinare"
+                                tol_3_la = target_4.IX
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.IX
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.IX
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.IX
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.IX
+                            Case "Forma profilului"
+                                tol_4_la = target_1.IX
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.IX
+                            Case "Circularitate"
+                                tol_4_la = target_2.IX
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.IX
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.IX
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.IX
+                            Case "Concentricitate"
+                                tol_4_la = target_3.IX
+                            Case "Simetrie"
+                                tol_4_la = target_3.IX
+                            Case "Paralelism"
+                                tol_4_la = target_4.IX
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.IX
+                            Case "Inclinare"
+                                tol_4_la = target_4.IX
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.IX
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.IX
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.IX
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.IX
+                            Case "Forma profilului"
+                                tol_5_la = target_1.IX
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.IX
+                            Case "Circularitate"
+                                tol_5_la = target_2.IX
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.IX
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.IX
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.IX
+                            Case "Concentricitate"
+                                tol_5_la = target_3.IX
+                            Case "Simetrie"
+                                tol_5_la = target_3.IX
+                            Case "Paralelism"
+                                tol_5_la = target_4.IX
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.IX
+                            Case "Inclinare"
+                                tol_5_la = target_4.IX
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.IX
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.IX
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.IX
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.IX
+                            Case "Forma profilului"
+                                tol_6_la = target_1.IX
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.IX
+                            Case "Circularitate"
+                                tol_6_la = target_2.IX
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.IX
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.IX
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.IX
+                            Case "Concentricitate"
+                                tol_6_la = target_3.IX
+                            Case "Simetrie"
+                                tol_6_la = target_3.IX
+                            Case "Paralelism"
+                                tol_6_la = target_4.IX
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.IX
+                            Case "Inclinare"
+                                tol_6_la = target_4.IX
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.IX
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.IX
+                        End Select
+                    End If
+                Case "X"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.X
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.X
+                            Case "Forma profilului"
+                                tol_1_la = target_1.X
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.X
+                            Case "Circularitate"
+                                tol_1_la = target_2.X
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.X
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.X
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.X
+                            Case "Concentricitate"
+                                tol_1_la = target_3.X
+                            Case "Simetrie"
+                                tol_1_la = target_3.X
+                            Case "Paralelism"
+                                tol_1_la = target_4.X
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.X
+                            Case "Inclinare"
+                                tol_1_la = target_4.X
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.X
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.X
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.X
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.X
+                            Case "Forma profilului"
+                                tol_2_la = target_1.X
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.X
+                            Case "Circularitate"
+                                tol_2_la = target_2.X
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.X
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.X
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.X
+                            Case "Concentricitate"
+                                tol_2_la = target_3.X
+                            Case "Simetrie"
+                                tol_2_la = target_3.X
+                            Case "Paralelism"
+                                tol_2_la = target_4.X
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.X
+                            Case "Inclinare"
+                                tol_2_la = target_4.X
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.X
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.X
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.X
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.X
+                            Case "Forma profilului"
+                                tol_3_la = target_1.X
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.X
+                            Case "Circularitate"
+                                tol_3_la = target_2.X
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.X
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.X
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.X
+                            Case "Concentricitate"
+                                tol_3_la = target_3.X
+                            Case "Simetrie"
+                                tol_3_la = target_3.X
+                            Case "Paralelism"
+                                tol_3_la = target_4.X
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.X
+                            Case "Inclinare"
+                                tol_3_la = target_4.X
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.X
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.X
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.X
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.X
+                            Case "Forma profilului"
+                                tol_4_la = target_1.X
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.X
+                            Case "Circularitate"
+                                tol_4_la = target_2.X
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.X
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.X
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.X
+                            Case "Concentricitate"
+                                tol_4_la = target_3.X
+                            Case "Simetrie"
+                                tol_4_la = target_3.X
+                            Case "Paralelism"
+                                tol_4_la = target_4.X
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.X
+                            Case "Inclinare"
+                                tol_4_la = target_4.X
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.X
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.X
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.X
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.X
+                            Case "Forma profilului"
+                                tol_5_la = target_1.X
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.X
+                            Case "Circularitate"
+                                tol_5_la = target_2.X
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.X
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.X
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.X
+                            Case "Concentricitate"
+                                tol_5_la = target_3.X
+                            Case "Simetrie"
+                                tol_5_la = target_3.X
+                            Case "Paralelism"
+                                tol_5_la = target_4.X
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.X
+                            Case "Inclinare"
+                                tol_5_la = target_4.X
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.X
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.X
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.X
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.X
+                            Case "Forma profilului"
+                                tol_6_la = target_1.X
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.X
+                            Case "Circularitate"
+                                tol_6_la = target_2.X
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.X
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.X
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.X
+                            Case "Concentricitate"
+                                tol_6_la = target_3.X
+                            Case "Simetrie"
+                                tol_6_la = target_3.X
+                            Case "Paralelism"
+                                tol_6_la = target_4.X
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.X
+                            Case "Inclinare"
+                                tol_6_la = target_4.X
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.X
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.X
+                        End Select
+                    End If
+                Case "XI"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.XI
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.XI
+                            Case "Forma profilului"
+                                tol_1_la = target_1.XI
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.XI
+                            Case "Circularitate"
+                                tol_1_la = target_2.XI
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.XI
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.XI
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.XI
+                            Case "Concentricitate"
+                                tol_1_la = target_3.XI
+                            Case "Simetrie"
+                                tol_1_la = target_3.XI
+                            Case "Paralelism"
+                                tol_1_la = target_4.XI
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.XI
+                            Case "Inclinare"
+                                tol_1_la = target_4.XI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.XI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.XI
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.XI
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.XI
+                            Case "Forma profilului"
+                                tol_2_la = target_1.XI
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.XI
+                            Case "Circularitate"
+                                tol_2_la = target_2.XI
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.XI
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.XI
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.XI
+                            Case "Concentricitate"
+                                tol_2_la = target_3.XI
+                            Case "Simetrie"
+                                tol_2_la = target_3.XI
+                            Case "Paralelism"
+                                tol_2_la = target_4.XI
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.XI
+                            Case "Inclinare"
+                                tol_2_la = target_4.XI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.XI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.XI
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.XI
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.XI
+                            Case "Forma profilului"
+                                tol_3_la = target_1.XI
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.XI
+                            Case "Circularitate"
+                                tol_3_la = target_2.XI
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.XI
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.XI
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.XI
+                            Case "Concentricitate"
+                                tol_3_la = target_3.XI
+                            Case "Simetrie"
+                                tol_3_la = target_3.XI
+                            Case "Paralelism"
+                                tol_3_la = target_4.XI
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.XI
+                            Case "Inclinare"
+                                tol_3_la = target_4.XI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.XI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.XI
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.XI
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.XI
+                            Case "Forma profilului"
+                                tol_4_la = target_1.XI
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.XI
+                            Case "Circularitate"
+                                tol_4_la = target_2.XI
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.XI
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.XI
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.XI
+                            Case "Concentricitate"
+                                tol_4_la = target_3.XI
+                            Case "Simetrie"
+                                tol_4_la = target_3.XI
+                            Case "Paralelism"
+                                tol_4_la = target_4.XI
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.XI
+                            Case "Inclinare"
+                                tol_4_la = target_4.XI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.XI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.XI
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.XI
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.XI
+                            Case "Forma profilului"
+                                tol_5_la = target_1.XI
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.XI
+                            Case "Circularitate"
+                                tol_5_la = target_2.XI
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.XI
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.XI
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.XI
+                            Case "Concentricitate"
+                                tol_5_la = target_3.XI
+                            Case "Simetrie"
+                                tol_5_la = target_3.XI
+                            Case "Paralelism"
+                                tol_5_la = target_4.XI
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.XI
+                            Case "Inclinare"
+                                tol_5_la = target_4.XI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.XI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.XI
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.XI
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.XI
+                            Case "Forma profilului"
+                                tol_6_la = target_1.XI
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.XI
+                            Case "Circularitate"
+                                tol_6_la = target_2.XI
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.XI
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.XI
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.XI
+                            Case "Concentricitate"
+                                tol_6_la = target_3.XI
+                            Case "Simetrie"
+                                tol_6_la = target_3.XI
+                            Case "Paralelism"
+                                tol_6_la = target_4.XI
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.XI
+                            Case "Inclinare"
+                                tol_6_la = target_4.XI
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.XI
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.XI
+                        End Select
+                    End If
+                Case "XII"
+                    If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_1_la = target_1.XII
+                            Case "Rectilinitate"
+                                tol_1_la = target_1.XII
+                            Case "Forma profilului"
+                                tol_1_la = target_1.XII
+                            Case "Forma suprafetei"
+                                tol_1_la = target_1.XII
+                            Case "Circularitate"
+                                tol_1_la = target_2.XII
+                            Case "Cilindricitate"
+                                tol_1_la = target_2.XII
+                            Case "Pozitia nominala"
+                                tol_1_la = target_3.XII
+                            Case "Coaxialitate"
+                                tol_1_la = target_3.XII
+                            Case "Concentricitate"
+                                tol_1_la = target_3.XII
+                            Case "Simetrie"
+                                tol_1_la = target_3.XII
+                            Case "Paralelism"
+                                tol_1_la = target_4.XII
+                            Case "Perpendicularitate"
+                                tol_1_la = target_4.XII
+                            Case "Inclinare"
+                                tol_1_la = target_4.XII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_1_la = target_5.XII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_1_la = target_6.XII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_2_la = target_1.XII
+                            Case "Rectilinitate"
+                                tol_2_la = target_1.XII
+                            Case "Forma profilului"
+                                tol_2_la = target_1.XII
+                            Case "Forma suprafetei"
+                                tol_2_la = target_1.XII
+                            Case "Circularitate"
+                                tol_2_la = target_2.XII
+                            Case "Cilindricitate"
+                                tol_2_la = target_2.XII
+                            Case "Pozitia nominala"
+                                tol_2_la = target_3.XII
+                            Case "Coaxialitate"
+                                tol_2_la = target_3.XII
+                            Case "Concentricitate"
+                                tol_2_la = target_3.XII
+                            Case "Simetrie"
+                                tol_2_la = target_3.XII
+                            Case "Paralelism"
+                                tol_2_la = target_4.XII
+                            Case "Perpendicularitate"
+                                tol_2_la = target_4.XII
+                            Case "Inclinare"
+                                tol_2_la = target_4.XII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_2_la = target_5.XII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_2_la = target_6.XII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_3_la = target_1.XII
+                            Case "Rectilinitate"
+                                tol_3_la = target_1.XII
+                            Case "Forma profilului"
+                                tol_3_la = target_1.XII
+                            Case "Forma suprafetei"
+                                tol_3_la = target_1.XII
+                            Case "Circularitate"
+                                tol_3_la = target_2.XII
+                            Case "Cilindricitate"
+                                tol_3_la = target_2.XII
+                            Case "Pozitia nominala"
+                                tol_3_la = target_3.XII
+                            Case "Coaxialitate"
+                                tol_3_la = target_3.XII
+                            Case "Concentricitate"
+                                tol_3_la = target_3.XII
+                            Case "Simetrie"
+                                tol_3_la = target_3.XII
+                            Case "Paralelism"
+                                tol_3_la = target_4.XII
+                            Case "Perpendicularitate"
+                                tol_3_la = target_4.XII
+                            Case "Inclinare"
+                                tol_3_la = target_4.XII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_3_la = target_5.XII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_3_la = target_6.XII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_4_la = target_1.XII
+                            Case "Rectilinitate"
+                                tol_4_la = target_1.XII
+                            Case "Forma profilului"
+                                tol_4_la = target_1.XII
+                            Case "Forma suprafetei"
+                                tol_4_la = target_1.XII
+                            Case "Circularitate"
+                                tol_4_la = target_2.XII
+                            Case "Cilindricitate"
+                                tol_4_la = target_2.XII
+                            Case "Pozitia nominala"
+                                tol_4_la = target_3.XII
+                            Case "Coaxialitate"
+                                tol_4_la = target_3.XII
+                            Case "Concentricitate"
+                                tol_4_la = target_3.XII
+                            Case "Simetrie"
+                                tol_4_la = target_3.XII
+                            Case "Paralelism"
+                                tol_4_la = target_4.XII
+                            Case "Perpendicularitate"
+                                tol_4_la = target_4.XII
+                            Case "Inclinare"
+                                tol_4_la = target_4.XII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_4_la = target_5.XII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_4_la = target_6.XII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_5_la = target_1.XII
+                            Case "Rectilinitate"
+                                tol_5_la = target_1.XII
+                            Case "Forma profilului"
+                                tol_5_la = target_1.XII
+                            Case "Forma suprafetei"
+                                tol_5_la = target_1.XII
+                            Case "Circularitate"
+                                tol_5_la = target_2.XII
+                            Case "Cilindricitate"
+                                tol_5_la = target_2.XII
+                            Case "Pozitia nominala"
+                                tol_5_la = target_3.XII
+                            Case "Coaxialitate"
+                                tol_5_la = target_3.XII
+                            Case "Concentricitate"
+                                tol_5_la = target_3.XII
+                            Case "Simetrie"
+                                tol_5_la = target_3.XII
+                            Case "Paralelism"
+                                tol_5_la = target_4.XII
+                            Case "Perpendicularitate"
+                                tol_5_la = target_4.XII
+                            Case "Inclinare"
+                                tol_5_la = target_4.XII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_5_la = target_5.XII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_5_la = target_6.XII
+                        End Select
+                    End If
+                    If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                        Dim selectedValue As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                        Select Case selectedValue
+                            Case "Planitate"
+                                tol_6_la = target_1.XII
+                            Case "Rectilinitate"
+                                tol_6_la = target_1.XII
+                            Case "Forma profilului"
+                                tol_6_la = target_1.XII
+                            Case "Forma suprafetei"
+                                tol_6_la = target_1.XII
+                            Case "Circularitate"
+                                tol_6_la = target_2.XII
+                            Case "Cilindricitate"
+                                tol_6_la = target_2.XII
+                            Case "Pozitia nominala"
+                                tol_6_la = target_3.XII
+                            Case "Coaxialitate"
+                                tol_6_la = target_3.XII
+                            Case "Concentricitate"
+                                tol_6_la = target_3.XII
+                            Case "Simetrie"
+                                tol_6_la = target_3.XII
+                            Case "Paralelism"
+                                tol_6_la = target_4.XII
+                            Case "Perpendicularitate"
+                                tol_6_la = target_4.XII
+                            Case "Inclinare"
+                                tol_6_la = target_4.XII
+                            Case "Independente la dimensiune ale bataii radiale"
+                                tol_6_la = target_5.XII
+                            Case "Independente la dimensiune ale bataii frontale"
+                                tol_6_la = target_6.XII
+                        End Select
+                    End If
+            End Select
 
 
+            'Dim values_tolerante_generale_la_rectilinitate_si_planitate As New List(Of tol_HKL)
+            Dim target_hkl_1 As tol_HKL
+            'Dim values_generale_la_simetrie As New List(Of tol_HKL)
+            Dim target_hkl_2 As tol_HKL
+            'Dim values_generale_la_perpendicularitate As New List(Of tol_HKL)
+            Dim target_hkl_3 As tol_HKL
+            'Dim values_generale_la_vataii_suprafetelor As New List(Of tol_HKL)
+            Dim target_hkl_4 As tol_HKL
 
+            'combobox_clasa_toleranta_hkl
+            For Each smth As tol_HKL In values_tolerante_generale_la_rectilinitate_si_planitate
+                If smth.DimensiuneDeLa <= dimensiune_piesa AndAlso smth.DimensiunePanaLa > dimensiune_piesa Then
+                    target_hkl_1 = smth
+                    Exit For
+                End If
+            Next
+            For Each smth As tol_HKL In values_generale_la_simetrie
+                If smth.DimensiuneDeLa <= dimensiune_piesa AndAlso smth.DimensiunePanaLa > dimensiune_piesa Then
+                    target_hkl_2 = smth
+                    Exit For
+                End If
+            Next
+            For Each smth As tol_HKL In values_generale_la_perpendicularitate
+                If smth.DimensiuneDeLa <= dimensiune_piesa AndAlso smth.DimensiunePanaLa > dimensiune_piesa Then
+                    target_hkl_3 = smth
+                    Exit For
+                End If
+            Next
+            For Each smth As tol_HKL In values_generale_la_vataii_suprafetelor
+                If smth.DimensiuneDeLa <= dimensiune_piesa AndAlso smth.DimensiunePanaLa > dimensiune_piesa Then
+                    target_hkl_4 = smth
+                    Exit For
+                End If
+            Next
+
+            If IsNothing(target_hkl_1) Then
+                target_hkl_1 = values_tolerante_generale_la_rectilinitate_si_planitate(values_tolerante_generale_la_rectilinitate_si_planitate.Count() - 1)
+            End If
+            If IsNothing(target_hkl_2) Then
+                target_hkl_2 = values_generale_la_simetrie(values_generale_la_simetrie.Count() - 1)
+            End If
+            If IsNothing(target_hkl_3) Then
+                target_hkl_3 = values_generale_la_perpendicularitate(values_generale_la_perpendicularitate.Count() - 1)
+            End If
+            If IsNothing(target_hkl_4) Then
+                target_hkl_4 = values_generale_la_vataii_suprafetelor(values_generale_la_vataii_suprafetelor.Count() - 1)
+            End If
+
+
+            If combobox_clasa_toleranta_hkl.SelectedItem IsNot Nothing Then
+
+                Dim selectedValue As String = combobox_clasa_toleranta_hkl.SelectedItem.ToString()
+                Select Case selectedValue
+                    Case "H"
+                        tol_hkl_1 = target_hkl_1.H
+                        tol_hkl_2 = target_hkl_2.H
+                        tol_hkl_3 = target_hkl_3.H
+                        tol_hkl_4 = target_hkl_4.H
+                    Case "K"
+                        tol_hkl_1 = target_hkl_1.K
+                        tol_hkl_2 = target_hkl_2.K
+                        tol_hkl_3 = target_hkl_3.K
+                        tol_hkl_4 = target_hkl_4.K
+                    Case "L"
+                        tol_hkl_1 = target_hkl_1.L
+                        tol_hkl_2 = target_hkl_2.L
+                        tol_hkl_3 = target_hkl_3.L
+                        tol_hkl_4 = target_hkl_4.L
+                End Select
+
+
+            End If
+
+        End If
 
 
 
@@ -653,12 +3350,10 @@ Public Class main_window
             toleranta_fundamentala = toleranta_fundamentala / 1000
             marime_toleranta_fundamentala = "mm"
         End If
-
         If abatere_fundamentala_arbore_es > 1000 OrElse abatere_fundamentala_arbore_es < -1000 Then
             abatere_fundamentala_arbore_es = abatere_fundamentala_arbore_es / 1000
             marimea_abatere_fundamentala_arbore_es = "mm"
         End If
-
         If abatere_fundamentala_arbore_ei > 1000 OrElse abatere_fundamentala_arbore_ei < -1000 Then
             abatere_fundamentala_arbore_ei = abatere_fundamentala_arbore_ei / 1000
             marimea_abatere_fundamentala_arbore_ei = "mm"
@@ -667,12 +3362,10 @@ Public Class main_window
             abatere_fundamentala_special_js = abatere_fundamentala_special_js / 1000
             marimea_abatere_fundamentala_special_js = "mm"
         End If
-
         If abatere_fundamentala_alezaj_EI > 1000 OrElse abatere_fundamentala_alezaj_EI < -1000 Then
             abatere_fundamentala_alezaj_EI = abatere_fundamentala_alezaj_EI / 1000
             marimea_batere_fundamentala_alezaj_EI = "mm"
         End If
-
         If abatere_fundamentala_alezaj_ES > 1000 OrElse abatere_fundamentala_alezaj_ES < -1000 Then
             abatere_fundamentala_alezaj_ES = abatere_fundamentala_alezaj_ES / 1000
             marimea_abatere_fundamentala_alezaj_ES = "mm"
@@ -711,7 +3404,6 @@ Public Class main_window
                             text = text & vbCrLf &
                             "Abaterea inferioară ei " & checkbox_arbore_es.SelectedItem.ToString() & ": " & abatere_fundamentala_special_js & marimea_abatere_fundamentala_special_js &
                             " (rezultată din es treapta js)"
-
                         End If
                     End If
                     If checkbox_arbore_ei.SelectedItem IsNot Nothing Then
@@ -737,6 +3429,193 @@ Public Class main_window
             End Select
         End If
 
+        If combobox_clasa_precizie.SelectedItem IsNot Nothing Then
+            Dim clasa_Selectata As String = combobox_clasa_precizie.SelectedItem.ToString()
+            If ComboBox_toleranta_la_nr1.SelectedItem IsNot Nothing Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                Dim selectedValueIIXXII As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                text = text & "Toleranță la " & selectedValueIIXXII & " " & clasa_Selectata & ": " & tol_1_la & "µm"
+            End If
+            If ComboBox_toleranta_la_nr2.SelectedItem IsNot Nothing Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                Dim selectedValueIIXXII As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                text = text & "Toleranță la " & selectedValueIIXXII & " " & clasa_Selectata & ": " & tol_2_la & "µm"
+            End If
+            If ComboBox_toleranta_la_nr3.SelectedItem IsNot Nothing Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                Dim selectedValueIIXXII As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                text = text & "Toleranță la " & selectedValueIIXXII & " " & clasa_Selectata & ": " & tol_3_la & "µm"
+            End If
+            If ComboBox_toleranta_la_nr4.SelectedItem IsNot Nothing Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                Dim selectedValueIIXXII As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                text = text & "Toleranță la " & selectedValueIIXXII & " " & clasa_Selectata & ": " & tol_4_la & "µm"
+            End If
+            If ComboBox_toleranta_la_nr5.SelectedItem IsNot Nothing Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                Dim selectedValueIIXXII As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                text = text & "Toleranță la " & selectedValueIIXXII & " " & clasa_Selectata & ": " & tol_5_la & "µm"
+            End If
+            If ComboBox_toleranta_la_nr6.SelectedItem IsNot Nothing Then
+                If Not String.IsNullOrEmpty(text) Then
+                    text = text & vbCrLf
+                End If
+                Dim selectedValueIIXXII As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+                text = text & "Toleranță la " & selectedValueIIXXII & " " & clasa_Selectata & ": " & tol_6_la & "µm"
+            End If
+
+            If combobox_clasa_toleranta_hkl.SelectedItem IsNot Nothing Then
+                Dim ce_clasa_hkl = combobox_clasa_toleranta_hkl.SelectedItem.ToString()
+                Dim tolla_1 As String = ComboBox_toleranta_la_nr1.SelectedItem.ToString()
+                Dim tolla_2 As String = ComboBox_toleranta_la_nr2.SelectedItem.ToString()
+                Dim tolla_3 As String = ComboBox_toleranta_la_nr3.SelectedItem.ToString()
+                Dim tolla_4 As String = ComboBox_toleranta_la_nr4.SelectedItem.ToString()
+                Dim tolla_5 As String = ComboBox_toleranta_la_nr5.SelectedItem.ToString()
+                Dim tolla_6 As String = ComboBox_toleranta_la_nr6.SelectedItem.ToString()
+
+                'rectilinitate e 1
+                'planitate e 2
+                'simetrie e 3
+                'perpendicularitate e 4
+                'bataii suprafetelor e 5
+                Dim afisare_1_adv As Boolean = False
+                Dim afisare_2_adv As Boolean = False
+                Dim afisare_3_adv As Boolean = False
+                Dim afisare_4_adv As Boolean = False
+                Dim afisare_5_adv As Boolean = False
+
+                Select Case tolla_1
+                    Case "Planitate"
+                        afisare_1_adv = True
+                    Case "Rectilinitate"
+                        afisare_2_adv = True
+                    Case "Simetrie"
+                        afisare_3_adv = True
+                    Case "Perpendicularitate"
+                        afisare_4_adv = True
+                    Case "Independente la dimensiune ale bataii radiale"
+                        afisare_5_adv = True
+                    Case "Independente la dimensiune ale bataii frontale"
+                        afisare_5_adv = True
+                End Select
+                Select Case tolla_2
+                    Case "Planitate"
+                        afisare_1_adv = True
+                    Case "Rectilinitate"
+                        afisare_2_adv = True
+                    Case "Simetrie"
+                        afisare_3_adv = True
+                    Case "Perpendicularitate"
+                        afisare_4_adv = True
+                    Case "Independente la dimensiune ale bataii radiale"
+                        afisare_5_adv = True
+                    Case "Independente la dimensiune ale bataii frontale"
+                        afisare_5_adv = True
+                End Select
+                Select Case tolla_3
+                    Case "Planitate"
+                        afisare_1_adv = True
+                    Case "Rectilinitate"
+                        afisare_2_adv = True
+                    Case "Simetrie"
+                        afisare_3_adv = True
+                    Case "Perpendicularitate"
+                        afisare_4_adv = True
+                    Case "Independente la dimensiune ale bataii radiale"
+                        afisare_5_adv = True
+                    Case "Independente la dimensiune ale bataii frontale"
+                        afisare_5_adv = True
+                End Select
+                Select Case tolla_4
+                    Case "Planitate"
+                        afisare_1_adv = True
+                    Case "Rectilinitate"
+                        afisare_2_adv = True
+                    Case "Simetrie"
+                        afisare_3_adv = True
+                    Case "Perpendicularitate"
+                        afisare_4_adv = True
+                    Case "Independente la dimensiune ale bataii radiale"
+                        afisare_5_adv = True
+                    Case "Independente la dimensiune ale bataii frontale"
+                        afisare_5_adv = True
+                End Select
+                Select Case tolla_5
+                    Case "Planitate"
+                        afisare_1_adv = True
+                    Case "Rectilinitate"
+                        afisare_2_adv = True
+                    Case "Simetrie"
+                        afisare_3_adv = True
+                    Case "Perpendicularitate"
+                        afisare_4_adv = True
+                    Case "Independente la dimensiune ale bataii radiale"
+                        afisare_5_adv = True
+                    Case "Independente la dimensiune ale bataii frontale"
+                        afisare_5_adv = True
+                End Select
+                Select Case tolla_6
+                    Case "Planitate"
+                        afisare_1_adv = True
+                    Case "Rectilinitate"
+                        afisare_2_adv = True
+                    Case "Simetrie"
+                        afisare_3_adv = True
+                    Case "Perpendicularitate"
+                        afisare_4_adv = True
+                    Case "Independente la dimensiune ale bataii radiale"
+                        afisare_5_adv = True
+                    Case "Independente la dimensiune ale bataii frontale"
+                        afisare_5_adv = True
+                End Select
+
+                If afisare_1_adv = True Then
+                    If Not String.IsNullOrEmpty(text) Then
+                        text = text & vbCrLf
+                    End If
+                    text = text & "Toleranță generală la rectilinitate " & ce_clasa_hkl & ": " & tol_hkl_1 & "mm"
+                End If
+                If afisare_2_adv = True Then
+                    If Not String.IsNullOrEmpty(text) Then
+                        text = text & vbCrLf
+                    End If
+                    text = text & "Toleranță generală la planitate " & ce_clasa_hkl & ": " & tol_hkl_1 & "mm"
+                End If
+
+                If afisare_3_adv = True Then
+                    If Not String.IsNullOrEmpty(text) Then
+                        text = text & vbCrLf
+                    End If
+                    text = text & "Toleranță generală la simetrie " & ce_clasa_hkl & ": " & tol_hkl_2 & "mm"
+                End If
+                If afisare_4_adv = True Then
+                    If Not String.IsNullOrEmpty(text) Then
+                        text = text & vbCrLf
+                    End If
+                    text = text & "Toleranță generală la perpendicularitate " & ce_clasa_hkl & ": " & tol_hkl_3 & "mm"
+                End If
+
+
+                If afisare_5_adv = True = True Then
+                    If Not String.IsNullOrEmpty(text) Then
+                        text = text & vbCrLf
+                    End If
+                    text = text & "Toleranță generală ale bătăii suprafețelor " & ce_clasa_hkl & ": " & tol_hkl_4 & "mm"
+                End If
+
+            End If
+
+        End If
         text_afisare.Text = text
 
     End Sub
@@ -834,15 +3713,16 @@ Public Class main_window
         checkbox_alezaj_ES.Items.Add("ZB")
         checkbox_alezaj_ES.Items.Add("ZC")
 
-        ComboBox_toleranta_la_nr1.Items.Add("Rectilinitate")
+
         ComboBox_toleranta_la_nr1.Items.Add("Planitate")
+        ComboBox_toleranta_la_nr1.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr1.Items.Add("Pozitia nominala")
         ComboBox_toleranta_la_nr1.Items.Add("Forma profilului")
         ComboBox_toleranta_la_nr1.Items.Add("Forma suprafetei")
         ComboBox_toleranta_la_nr1.Items.Add("Circularitate")
         ComboBox_toleranta_la_nr1.Items.Add("Cilindricitate")
-        ComboBox_toleranta_la_nr1.Items.Add("Rectilinitate")
-        ComboBox_toleranta_la_nr1.Items.Add("Pozitia nominala")
         ComboBox_toleranta_la_nr1.Items.Add("Coaxialitate")
+        ComboBox_toleranta_la_nr1.Items.Add("Concentricitate")
         ComboBox_toleranta_la_nr1.Items.Add("Simetrie")
         ComboBox_toleranta_la_nr1.Items.Add("Paralelism")
         ComboBox_toleranta_la_nr1.Items.Add("Perpendicularitate")
@@ -851,15 +3731,15 @@ Public Class main_window
         ComboBox_toleranta_la_nr1.Items.Add("Independente la dimensiune ale bataii frontale")
 
 
-        ComboBox_toleranta_la_nr2.Items.Add("Rectilinitate")
         ComboBox_toleranta_la_nr2.Items.Add("Planitate")
+        ComboBox_toleranta_la_nr2.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr2.Items.Add("Pozitia nominala")
         ComboBox_toleranta_la_nr2.Items.Add("Forma profilului")
         ComboBox_toleranta_la_nr2.Items.Add("Forma suprafetei")
         ComboBox_toleranta_la_nr2.Items.Add("Circularitate")
         ComboBox_toleranta_la_nr2.Items.Add("Cilindricitate")
-        ComboBox_toleranta_la_nr2.Items.Add("Rectilinitate")
-        ComboBox_toleranta_la_nr2.Items.Add("Pozitia nominala")
         ComboBox_toleranta_la_nr2.Items.Add("Coaxialitate")
+        ComboBox_toleranta_la_nr2.Items.Add("Concentricitate")
         ComboBox_toleranta_la_nr2.Items.Add("Simetrie")
         ComboBox_toleranta_la_nr2.Items.Add("Paralelism")
         ComboBox_toleranta_la_nr2.Items.Add("Perpendicularitate")
@@ -868,21 +3748,88 @@ Public Class main_window
         ComboBox_toleranta_la_nr2.Items.Add("Independente la dimensiune ale bataii frontale")
 
 
-        ComboBox_toleranta_la_nr3.Items.Add("Rectilinitate")
+
         ComboBox_toleranta_la_nr3.Items.Add("Planitate")
+        ComboBox_toleranta_la_nr3.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr3.Items.Add("Pozitia nominala")
         ComboBox_toleranta_la_nr3.Items.Add("Forma profilului")
         ComboBox_toleranta_la_nr3.Items.Add("Forma suprafetei")
         ComboBox_toleranta_la_nr3.Items.Add("Circularitate")
         ComboBox_toleranta_la_nr3.Items.Add("Cilindricitate")
-        ComboBox_toleranta_la_nr3.Items.Add("Rectilinitate")
-        ComboBox_toleranta_la_nr3.Items.Add("Pozitia nominala")
         ComboBox_toleranta_la_nr3.Items.Add("Coaxialitate")
+        ComboBox_toleranta_la_nr3.Items.Add("Concentricitate")
         ComboBox_toleranta_la_nr3.Items.Add("Simetrie")
         ComboBox_toleranta_la_nr3.Items.Add("Paralelism")
         ComboBox_toleranta_la_nr3.Items.Add("Perpendicularitate")
         ComboBox_toleranta_la_nr3.Items.Add("Inclinare")
         ComboBox_toleranta_la_nr3.Items.Add("Independente la dimensiune ale bataii radiale")
         ComboBox_toleranta_la_nr3.Items.Add("Independente la dimensiune ale bataii frontale")
+
+        ComboBox_toleranta_la_nr4.Items.Add("Planitate")
+        ComboBox_toleranta_la_nr4.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr4.Items.Add("Pozitia nominala")
+        ComboBox_toleranta_la_nr4.Items.Add("Forma profilului")
+        ComboBox_toleranta_la_nr4.Items.Add("Forma suprafetei")
+        ComboBox_toleranta_la_nr4.Items.Add("Circularitate")
+        ComboBox_toleranta_la_nr4.Items.Add("Cilindricitate")
+        ComboBox_toleranta_la_nr4.Items.Add("Coaxialitate")
+        ComboBox_toleranta_la_nr4.Items.Add("Concentricitate")
+        ComboBox_toleranta_la_nr4.Items.Add("Simetrie")
+        ComboBox_toleranta_la_nr4.Items.Add("Paralelism")
+        ComboBox_toleranta_la_nr4.Items.Add("Perpendicularitate")
+        ComboBox_toleranta_la_nr4.Items.Add("Inclinare")
+        ComboBox_toleranta_la_nr4.Items.Add("Independente la dimensiune ale bataii radiale")
+        ComboBox_toleranta_la_nr4.Items.Add("Independente la dimensiune ale bataii frontale")
+
+        ComboBox_toleranta_la_nr5.Items.Add("Planitate")
+        ComboBox_toleranta_la_nr5.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr5.Items.Add("Pozitia nominala")
+        ComboBox_toleranta_la_nr5.Items.Add("Forma profilului")
+        ComboBox_toleranta_la_nr5.Items.Add("Forma suprafetei")
+        ComboBox_toleranta_la_nr5.Items.Add("Circularitate")
+        ComboBox_toleranta_la_nr5.Items.Add("Cilindricitate")
+        ComboBox_toleranta_la_nr5.Items.Add("Coaxialitate")
+        ComboBox_toleranta_la_nr5.Items.Add("Concentricitate")
+        ComboBox_toleranta_la_nr5.Items.Add("Simetrie")
+        ComboBox_toleranta_la_nr5.Items.Add("Paralelism")
+        ComboBox_toleranta_la_nr5.Items.Add("Perpendicularitate")
+        ComboBox_toleranta_la_nr5.Items.Add("Inclinare")
+        ComboBox_toleranta_la_nr5.Items.Add("Independente la dimensiune ale bataii radiale")
+        ComboBox_toleranta_la_nr5.Items.Add("Independente la dimensiune ale bataii frontale")
+
+        ComboBox_toleranta_la_nr6.Items.Add("Planitate")
+        ComboBox_toleranta_la_nr6.Items.Add("Rectilinitate")
+        ComboBox_toleranta_la_nr6.Items.Add("Pozitia nominala")
+        ComboBox_toleranta_la_nr6.Items.Add("Forma profilului")
+        ComboBox_toleranta_la_nr6.Items.Add("Forma suprafetei")
+        ComboBox_toleranta_la_nr6.Items.Add("Circularitate")
+        ComboBox_toleranta_la_nr6.Items.Add("Cilindricitate")
+        ComboBox_toleranta_la_nr6.Items.Add("Coaxialitate")
+        ComboBox_toleranta_la_nr6.Items.Add("Concentricitate")
+        ComboBox_toleranta_la_nr6.Items.Add("Simetrie")
+        ComboBox_toleranta_la_nr6.Items.Add("Paralelism")
+        ComboBox_toleranta_la_nr6.Items.Add("Perpendicularitate")
+        ComboBox_toleranta_la_nr6.Items.Add("Inclinare")
+        ComboBox_toleranta_la_nr6.Items.Add("Independente la dimensiune ale bataii radiale")
+        ComboBox_toleranta_la_nr6.Items.Add("Independente la dimensiune ale bataii frontale")
+
+        combobox_clasa_precizie.Items.Add("I")
+        combobox_clasa_precizie.Items.Add("II")
+        combobox_clasa_precizie.Items.Add("III")
+        combobox_clasa_precizie.Items.Add("IV")
+        combobox_clasa_precizie.Items.Add("V")
+        combobox_clasa_precizie.Items.Add("VI")
+        combobox_clasa_precizie.Items.Add("VII")
+        combobox_clasa_precizie.Items.Add("VIII")
+        combobox_clasa_precizie.Items.Add("IX")
+        combobox_clasa_precizie.Items.Add("X")
+        combobox_clasa_precizie.Items.Add("XI")
+        combobox_clasa_precizie.Items.Add("XII")
+
+
+        combobox_clasa_toleranta_hkl.Items.Add("H")
+        combobox_clasa_toleranta_hkl.Items.Add("K")
+        combobox_clasa_toleranta_hkl.Items.Add("L")
 
     End Sub
     Private Sub ToleranteFundamentaleLiniareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranteFundamentaleLiniareToolStripMenuItem.Click
@@ -907,41 +3854,24 @@ Public Class main_window
         Dim window As New tabel_abateri_fundamentale_alezaje_delta()
         window.Show()
     End Sub
-
-    'Dim values_ToleranteRectilinePlanitateFormaProfiluluiSuprafetei As New List(Of claseI_XII)
-    'valori in micrometrii
-    'Dim values_ToleranteCircularitateCilindritate As New List(Of claseI_XII)
-    'valori in micrometrii
-    'Dim values_TolerantePozitiaNominalaCoaxialitateConcentritateSimetri As New List(Of claseI_XII)
-    'valori in micrometrii
-    'Dim values_ToleranteParalelismPerpendicularitateInclinare As New List(Of claseI_XII)
-    'valori in micrometrii
-    'Dim values_ToleranteindependenteDeDimensiuniAleBataiiRadiale As New List(Of claseI_XII)
-    'valori in micrometrii
-    'Dim values_ToleranteindependenteDeDimensiuniAleBataiiFrontale As New List(Of claseI_XII)
-
-
     Private Sub ToleranțeIndividualeLaRectilinitatePlanitateFormaDatăAProfiluluiȘiFormaDatăASuprafețeiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranțeIndividualeLaRectilinitatePlanitateFormaDatăAProfiluluiȘiFormaDatăASuprafețeiToolStripMenuItem.Click
         Dim window As New tabel_clase_I_XII()
         window.valori() = values_ToleranteRectilinePlanitateFormaProfiluluiSuprafetei
         window.nume_fereastra = "Valorile toleranțelor individuale la circularitate și la cilindricitate"
         window.Show()
     End Sub
-
     Private Sub ValorileToleranțelorIndividualeLaCircularitateȘiLaCilindricitateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ValorileToleranțelorIndividualeLaCircularitateȘiLaCilindricitateToolStripMenuItem.Click
         Dim window As New tabel_clase_I_XII()
         window.valori() = values_ToleranteCircularitateCilindritate
         window.nume_fereastra = "Valorile toleranțelor individuale la circularitate și la cilindricitate"
         window.Show()
     End Sub
-
     Private Sub ToleranteleLaPozițiaNominalăLaCoaxialitateȘiConcentricitateȘiLaSimetrieToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranteleLaPozițiaNominalăLaCoaxialitateȘiConcentricitateȘiLaSimetrieToolStripMenuItem.Click
         Dim window As New tabel_clase_I_XII()
         window.valori() = values_TolerantePozitiaNominalaCoaxialitateConcentritateSimetri
         window.nume_fereastra = "Tolerantele la poziția nominală, la coaxialitate și concentricitate și la simetrie"
         window.Show()
     End Sub
-
     Private Sub ToleranteleIndividualeLaParalelismPerpendicularitateȘiÎnclinareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranteleIndividualeLaParalelismPerpendicularitateȘiÎnclinareToolStripMenuItem.Click
         Dim window As New tabel_clase_I_XII()
         window.valori() = values_ToleranteParalelismPerpendicularitateInclinare
@@ -964,6 +3894,33 @@ Public Class main_window
     End Sub
 
 
+    Private Sub ToleranțeGeneraleLaSimetrieToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranțeGeneraleLaSimetrieToolStripMenuItem.Click
+        Dim window As New tabel_tol_HKL()
+        window.valori = values_tolerante_generale_la_rectilinitate_si_planitate
+        window.nume_fereastra = "Toleranțe generale la rectilinitate și planitate"
+        window.Show()
+    End Sub
+
+    Private Sub ToleranțeGeneraleLaPerpendicularitateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranțeGeneraleLaPerpendicularitateToolStripMenuItem.Click
+        Dim window As New tabel_tol_HKL()
+        window.valori = values_generale_la_simetrie
+        window.nume_fereastra = "Toleranțe generale la simetrie"
+        window.Show()
+    End Sub
+
+    Private Sub ToleranțeGeneraleLaRectilinitateȘiPlanitateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranțeGeneraleLaRectilinitateȘiPlanitateToolStripMenuItem.Click
+        Dim window As New tabel_tol_HKL()
+        window.valori = values_generale_la_perpendicularitate
+        window.nume_fereastra = "Toleranțe generale la perpendicularitate"
+        window.Show()
+    End Sub
+
+    Private Sub ToleranțeGeneraleAleBătăiiSuprafețelorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToleranțeGeneraleAleBătăiiSuprafețelorToolStripMenuItem.Click
+        Dim window As New tabel_tol_HKL()
+        window.valori = values_generale_la_vataii_suprafetelor
+        window.nume_fereastra = "Toleranțe generale ale bătăii suprafețelor"
+        window.Show()
+    End Sub
 
     Private Sub readClase_I_XII(filePath As String, list As List(Of claseI_XII))
         Using parser As New TextFieldParser(filePath)
@@ -1018,6 +3975,28 @@ Public Class main_window
                 Dim IT8 As Double = If(fields(5) = "-", 0, If(Double.TryParse(fields(5), CultureInfo.InvariantCulture, IT8), IT8, 0))
 
                 Dim newObj As New abateri_fundamentale_alezaje_delta(dimensiuneDeLa, dimensiunePanaLa, IT3, IT4, IT5, IT6, IT7, IT8)
+                list.Add(newObj)
+            End While
+        End Using
+    End Sub
+
+
+    Private Sub readHKL(filePath As String, list As List(Of tol_HKL))
+        Using parser As New TextFieldParser(filePath)
+            parser.TextFieldType = FieldType.Delimited
+            parser.SetDelimiters(",")
+
+            parser.ReadLine()
+            While Not parser.EndOfData
+                Dim fields As String() = parser.ReadFields()
+
+                Dim dimensiuneDeLa As Double = If(fields(0) = "-", 0, If(Double.TryParse(fields(0), CultureInfo.InvariantCulture, dimensiuneDeLa), dimensiuneDeLa, 0))
+                Dim dimensiunePanaLa As Double = If(fields(1) = "-", 0, If(Double.TryParse(fields(1), CultureInfo.InvariantCulture, dimensiunePanaLa), dimensiunePanaLa, 0))
+                Dim H As Double = If(fields(2) = "-", 0, If(Double.TryParse(fields(2), CultureInfo.InvariantCulture, H), H, 0))
+                Dim K As Double = If(fields(3) = "-", 0, If(Double.TryParse(fields(3), CultureInfo.InvariantCulture, K), K, 0))
+                Dim L As Double = If(fields(4) = "-", 0, If(Double.TryParse(fields(4), CultureInfo.InvariantCulture, L), L, 0))
+
+                Dim newObj As New tol_HKL(dimensiuneDeLa, dimensiunePanaLa, H, K, L)
                 list.Add(newObj)
             End While
         End Using
@@ -1325,4 +4304,7 @@ Public Class main_window
         End Select
     End Sub
 
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+
+    End Sub
 End Class

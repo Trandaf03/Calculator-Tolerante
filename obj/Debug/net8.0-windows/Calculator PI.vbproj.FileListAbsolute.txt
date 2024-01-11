@@ -33,3 +33,8 @@ C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabelul62.csv
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabelul63.csv
 C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabelul64.csv
 C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_clase_I_XII.resources
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel43.csv
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel65.csv
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel66.csv
+C:\Users\andre\source\repos\Calculator PI\obj\Debug\net8.0-windows\Calculator_PI.tabel_tol_HKL.resources
+C:\Users\andre\source\repos\Calculator PI\bin\Debug\net8.0-windows\tabel67.csv

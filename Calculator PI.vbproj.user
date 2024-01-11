@@ -22,5 +22,8 @@
     <Compile Update="main_window.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="tabel_tol_HKL.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
