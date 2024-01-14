@@ -1,5 +1,7 @@
 ﻿Imports System.Globalization
+Imports System.IO
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Button
 Imports Microsoft.VisualBasic.FileIO
 
 Public Class main_window
@@ -56,13 +58,23 @@ Public Class main_window
         readRugozitate("tabelul55.csv", values_rugozitate)
 
         loadObjectsMenu()
-
-
+        ShowFirstTimeMessage()
 
     End Sub
 
+    Private Sub ShowFirstTimeMessage()
+        Dim configFilePath As String = "config.txt"
 
+        If Not File.Exists(configFilePath) Then
+            ' Show the message box
+            MessageBox.Show("Pentru a folosi această interfață nu este nevoie ca toate datele să fie introduse! În cazul în care lipsesc date importante, în momentul calculării valorilor va apărea o eroare.", "Atenție!", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+            ' Create the config file to indicate that the message has been shown
+            Using writer As New StreamWriter(configFilePath)
+                writer.Write("MessageShown=True")
+            End Using
+        End If
+    End Sub
     Private Sub calculeaza(sender As Object, e As EventArgs) Handles buton_calculeaza.Click
         Dim dimensiune_piesa As Double
         If Double.TryParse(text_dimensiune.Text, dimensiune_piesa) Then
@@ -4484,7 +4496,14 @@ Public Class main_window
         label_arbore_es.Visible = False
     End Sub
 
-    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+    Private Sub InformațiiGeneraleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InformațiiGeneraleToolStripMenuItem.Click
         MessageBox.Show("Această aplicație a fost dezvoltată de Trandafir Andrei - Alexandru, student la UNSTPB, anul II, FIIR - SIA. Datele de intrare pentru această aplicație au fost furnizate din suportul de curs al materiei Procese Industriale 1,Prof. Dr. Ing. Nicolae Ionescu.")
+
+    End Sub
+
+    Private Sub VeziMesajDeÎnceputToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VeziMesajDeÎnceputToolStripMenuItem.Click
+        MessageBox.Show("Pentru a folosi această interfață nu este nevoie ca toate datele să fie introduse! În cazul în care lipsesc date importante, în momentul calculării valorilor va apărea o eroare.", "Atenție!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
     End Sub
 End Class
+
