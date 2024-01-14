@@ -84,13 +84,14 @@ Partial Class main_window
         switch_stas = New CheckBox()
         cmb_iso_stas = New ComboBox()
         btn_reset = New Button()
+        HelpToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' MenuStrip1
         ' 
         MenuStrip1.ImageScalingSize = New Size(24, 24)
-        MenuStrip1.Items.AddRange(New ToolStripItem() {VeziTabeleToolStripMenuItem, CalculAjustajToolStripMenuItem})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {VeziTabeleToolStripMenuItem, CalculAjustajToolStripMenuItem, HelpToolStripMenuItem})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
         MenuStrip1.Size = New Size(800, 24)
@@ -573,6 +574,12 @@ Partial Class main_window
         btn_reset.Text = "Reseteaza"
         btn_reset.UseVisualStyleBackColor = True
         ' 
+        ' HelpToolStripMenuItem
+        ' 
+        HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        HelpToolStripMenuItem.Size = New Size(44, 20)
+        HelpToolStripMenuItem.Text = "Help"
+        ' 
         ' main_window
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -694,4 +701,5 @@ Partial Class main_window
     Friend WithEvents cmb_iso_stas As ComboBox
     Friend WithEvents CalculAjustajToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents btn_reset As Button
+    Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
 End Class

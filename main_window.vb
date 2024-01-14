@@ -3653,29 +3653,29 @@ Public Class main_window
             End If
             Dim val As String = String.Empty
 
-                For Each value As rugozitate In values_rugozitate
-                    If value.ISO.Equals(selectie_clasa) OrElse value.STAS.Equals(selectie_clasa) Then
-                        Select Case selectie_ra
-                            Case "Ra"
-                                val = value.Ra.ToString() & "µm"
-                            Case "Rz"
-                                val = value.Rz.ToString() & "µm"
-                            Case "Ry"
-                                val = value.Ry.ToString() & "µm"
-                            Case "l"
-                                val = value.l.ToString() & "mm"
-                        End Select
-                    End If
-                Next
-
-                If Not String.IsNullOrEmpty(text) Then
-                    text = text & vbCrLf
+            For Each value As rugozitate In values_rugozitate
+                If value.ISO.Equals(selectie_clasa) OrElse value.STAS.Equals(selectie_clasa) Then
+                    Select Case selectie_ra
+                        Case "Ra"
+                            val = value.Ra.ToString() & "µm"
+                        Case "Rz"
+                            val = value.Rz.ToString() & "µm"
+                        Case "Ry"
+                            val = value.Ry.ToString() & "µm"
+                        Case "l"
+                            val = value.l.ToString() & "mm"
+                    End Select
                 End If
+            Next
 
-                text = text & "Parametrul de rugozitate " & selectie_ra & " " & selectie_clasa & ": " & val.ToString()
+            If Not String.IsNullOrEmpty(text) Then
+                text = text & vbCrLf
             End If
 
-            text_afisare.Text = text
+            text = text & "Parametrul de rugozitate " & selectie_ra & " " & selectie_clasa & ": " & val.ToString()
+        End If
+
+        text_afisare.Text = text
 
     End Sub
 
@@ -4484,4 +4484,7 @@ Public Class main_window
         label_arbore_es.Visible = False
     End Sub
 
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+        MessageBox.Show("Această aplicație a fost dezvoltată de Trandafir Andrei - Alexandru, student la UNSTPB, anul II, FIIR - SIA. Datele de intrare pentru această aplicație au fost furnizate din suportul de curs al materiei Procese Industriale 1,Prof. Dr. Ing. Nicolae Ionescu.")
+    End Sub
 End Class

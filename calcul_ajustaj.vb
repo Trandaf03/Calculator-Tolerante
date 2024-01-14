@@ -76,5 +76,7 @@
 
     End Sub
 
+    Private Sub calcul_ajustaj_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class
