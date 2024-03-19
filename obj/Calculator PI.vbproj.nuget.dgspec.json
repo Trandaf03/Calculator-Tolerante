@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andre\\source\\repos\\Calculator PI\\Calculator PI.vbproj": {}
+    "D:\\Projects\\Calculator-Tolerante\\Calculator PI.vbproj": {}
   },
   "projects": {
-    "C:\\Users\\andre\\source\\repos\\Calculator PI\\Calculator PI.vbproj": {
+    "D:\\Projects\\Calculator-Tolerante\\Calculator PI.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andre\\source\\repos\\Calculator PI\\Calculator PI.vbproj",
+        "projectUniqueName": "D:\\Projects\\Calculator-Tolerante\\Calculator PI.vbproj",
         "projectName": "Calculator PI",
-        "projectPath": "C:\\Users\\andre\\source\\repos\\Calculator PI\\Calculator PI.vbproj",
+        "projectPath": "D:\\Projects\\Calculator-Tolerante\\Calculator PI.vbproj",
         "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andre\\source\\repos\\Calculator PI\\obj\\",
+        "outputPath": "D:\\Projects\\Calculator-Tolerante\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -39,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -63,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
